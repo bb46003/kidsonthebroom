@@ -2,10 +2,10 @@
   "name": "kidsonbrooms-BB",
   "title": "Kids On Brooms - moja wersja",
   "description": "The Kids On Brooms system for FoundryVTT!",
-  "version": "1.0.6",
+  "version": "1.0.0",
   "minimumCoreVersion": "11.315",
   "compatibleCoreVersion": "12",
-  "author": "Josiah Bradbury",
+  "author": "bb46003",
   "esmodules": ["module/kidsonbrooms.mjs"],
   "styles": ["css/kidsonbrooms.css"],
   "languages": [
