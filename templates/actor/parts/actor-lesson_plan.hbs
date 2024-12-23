@@ -1,0 +1,339 @@
+
+<form class="{{cssClass}}" autocomplete="off">
+<body>
+    <table>
+        <tr>
+            <th></th>
+            <th style="text-align: center;">Poniedziałek</th>
+            <th style="text-align: center;">Wtorek</th>
+            <th style="text-align: center;">Środa</th>
+            <th style="text-align: center;">Czwartek</th>
+            <th style="text-align: center;">Piątek</th>            
+        </tr>
+        <tr>
+            <td>Rano </td>
+            <td> 
+                <select name="system.lesson_plan.topic.indexpr" >
+          
+          <option value="0"{{#if system.lesson_plan.topic.indexp === "0"}}selected{{/if}}>{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1"{{#if system.lesson_plan.topic.indexp === "1"}}selected{{/if}}>{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2"{{#if system.lesson_plan.topic.indexp === "2"}}selected{{/if}}>{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4"{{#if system.lesson_plan.topic.indexp === "4"}}selected{{/if}}>Brak zajęć</option>           
+          
+        </select></td>
+            <td><select name="system.lesson_plan.topic.indexwr">
+          {{#select system.lesson_plan.topic.indexwr}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+            <td><select name="system.lesson_plan.topic.indexsr">
+          {{#select system.lesson_plan.topic.indexsr}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+            
+            <td><select name="system.lesson_plan.topic.indexcr">
+          {{#select system.lesson_plan.topic.indexcr}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+            <td><select name="system.lesson_plan.topic.indexpir">
+          {{#select system.lesson_plan.topic.indexpir}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+        
+        </tr>
+        <tr>
+            <td>Po południu</td>
+            <td> 
+                <select name="system.lesson_plan.topic.indexpp">
+          {{#select system.lesson_plan.topic.indexpp}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+            <td><select name="system.lesson_plan.topic.indexwp">
+          {{#select system.lesson_plan.topic.indexwp}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+            <td><select name="system.lesson_plan.topic.indexsp">
+          {{#select system.lesson_plan.topic.indexsp}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+            
+            <td><select name="system.lesson_plan.topic.indexcp">
+          {{#select system.lesson_plan.topic.indexcp}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+            <td><select name="system.lesson_plan.topic.indexpip">
+          {{#select system.lesson_plan.topic.indexpip}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+            
+        </tr>
+        <tr>
+            <td>Zajęcia pozalekcyjne</td>
+          <td> 
+                <select name="system.lesson_plan.topic.indexppo">
+          {{#select system.lesson_plan.topic.indexppo}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+            <td><select name="system.lesson_plan.topic.indexwpo">
+          {{#select system.lesson_plan.topic.indexwpo}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+            <td><select name="system.lesson_plan.topic.indexspo">
+          {{#select system.lesson_plan.topic.indexspo}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+            
+            <td><select name="system.lesson_plan.topic.indexcpo">
+          {{#select system.lesson_plan.topic.indexcpo}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+            <td><select name="system.lesson_plan.topic.indexpipo">
+          {{#select system.lesson_plan.topic.indexpipo}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+            
+        </tr>
+        <tr>
+            <td>Noc</td>
+           <td> 
+                <select name="system.lesson_plan.topic.indexpn">
+          {{#select system.lesson_plan.topic.indexpn}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+            <td><select name="system.lesson_plan.topic.indexwn">
+          {{#select system.lesson_plan.topic.indexwn}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+            <td><select name="system.lesson_plan.topic.indexsn">
+          {{#select system.lesson_plan.topic.indexsn}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+            
+            <td><select name="system.lesson_plan.topic.indexcn">
+          {{#select system.lesson_plan.topic.indexcn}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+            <td><select name="system.lesson_plan.topic.indexpin">
+          {{#select system.lesson_plan.topic.indexpin}}
+          <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4">Brak zajęć</option>           
+          {{/select}}
+        </select></td>
+            
+        </tr>
+    </table>
+    
+
+    <section class="plan_row">
+        <div class="plan_column">
+            <fieldset class="grid-span-3 resource flexcol" >
+                <legend class="flexcol-legend">Lista Zajęć</legend>
+                </span><div class="resource-content flexrow lessonname">
+                    <input type="text" name="system.lesson_plan.topic.labelt1" value="{{system.lesson_plan.topic.labelt1}}" />
+                  </div>
+                
+               
+                
+                  
+                   <div class="resource-content flexrow lessonname">
+                      <input type="text" name="system.lesson_plan.topic.labelt2" value="{{system.lesson_plan.topic.labelt2}}" />
+                    </div>
+                
+                 
+                  
+                  
+                     <div class="resource-content flexrow lessonname">
+                      <input type="text" name="system.lesson_plan.topic.labelt3" value="{{system.lesson_plan.topic.labelt3}}"/>
+                    </div>
+                
+                  
+            </fieldset>
+        </div>
+        
+        <div class="plan_column">
+            <Fieldset class="flexrow ">
+                <legend class="flexcol-legend">Punkty</legend>
+                <div class="checkbox-container ">
+                    <label>
+                        <div class="progress checkbox">
+                        <input  type="checkbox" name="system.lesson_plan.progress.progres1_1"  {{#if system.lesson_plan.progress.progres1_1}}checked{{/if}}>
+                        </div>
+                    </label>
+                   
+                    <label class="checkbox-custom" for="checkbox-1">
+                        <input class="red-bold-checkbox" type="checkbox" id="checkbox-1" name="system.lesson_plan.progress.progres1_2"  {{#if system.lesson_plan.progress.progres1_2}}checked{{/if}} >
+                    </label>
+                    <label>
+                        <input type="checkbox"name="system.lesson_plan.progress.progres1_3"  {{#if system.lesson_plan.progress.progres1_3}}checked{{/if}}>
+                    </label>
+                    <label>
+                        <input type="checkbox"name="system.lesson_plan.progress.progres1_4"  {{#if system.lesson_plan.progress.progres1_4}}checked{{/if}}>
+                    </label>
+                    <label>
+                        <input type="checkbox" name="system.lesson_plan.progress.progres1_5"  {{#if system.lesson_plan.progress.progres1_5}}checked{{/if}}>
+                    </label>
+                    <label >
+                        <input class="red-bold-checkbox" type="checkbox"name="system.lesson_plan.progress.progres1_6"  {{#if system.lesson_plan.progress.progres1_6}}checked{{/if}}>
+                    </label>
+                    <label>
+                        <input type="checkbox"name="system.lesson_plan.progress.progres1_7"  {{#if system.lesson_plan.progress.progres1_7}}checked{{/if}}>
+                    </label>
+                    <label>
+                        <input type="checkbox"name="system.lesson_plan.progress.progres1_8"  {{#if system.lesson_plan.progress.progres1_8}}checked{{/if}}>
+                    </label>
+                    <label>
+                        <input type="checkbox"name="system.lesson_plan.progress.progres1_9"  {{#if system.lesson_plan.progress.progres1_9}}checked{{/if}}>
+                    </label>
+                    <label >
+                        <input class="red-bold-checkbox" type="checkbox"name="system.lesson_plan.progress.progres1_10"  {{#if system.lesson_plan.progress.progres1_10}}checked{{/if}}>
+                    </label>
+                </div>
+                <div class="checkbox-container ">
+                    <label>
+                        <div class="progress checkbox">
+                        <input  type="checkbox" name="system.lesson_plan.progress.progres2_1"  {{#if system.lesson_plan.progress.progres2_1}}checked{{/if}}>
+                        </div>
+                    </label>
+                   
+                    <label class="checkbox-custom" for="checkbox-1">
+                        <input class="red-bold-checkbox" type="checkbox" id="checkbox-1" name="system.lesson_plan.progress.progres2_2"  {{#if system.lesson_plan.progress.progres2_2}}checked{{/if}} >
+                    </label>
+                    <label>
+                        <input type="checkbox"name="system.lesson_plan.progress.progres2_3"  {{#if system.lesson_plan.progress.progres2_3}}checked{{/if}}>
+                    </label>
+                    <label>
+                        <input type="checkbox"name="system.lesson_plan.progress.progres2_4"  {{#if system.lesson_plan.progress.progres2_4}}checked{{/if}}>
+                    </label>
+                    <label>
+                        <input type="checkbox" name="system.lesson_plan.progress.progres2_5"  {{#if system.lesson_plan.progress.progres2_5}}checked{{/if}}>
+                    </label>
+                    <label >
+                        <input class="red-bold-checkbox" type="checkbox"name="system.lesson_plan.progress.progres2_6"  {{#if system.lesson_plan.progress.progres2_6}}checked{{/if}}>
+                    </label>
+                    <label>
+                        <input type="checkbox"name="system.lesson_plan.progress.progres2_7"  {{#if system.lesson_plan.progress.progres2_7}}checked{{/if}}>
+                    </label>
+                    <label>
+                        <input type="checkbox"name="system.lesson_plan.progress.progres2_8"  {{#if system.lesson_plan.progress.progres2_8}}checked{{/if}}>
+                    </label>
+                    <label>
+                        <input type="checkbox"name="system.lesson_plan.progress.progres2_9"  {{#if system.lesson_plan.progress.progres2_9}}checked{{/if}}>
+                    </label>
+                    <label >
+                        <input class="red-bold-checkbox" type="checkbox"name="system.lesson_plan.progress.progres2_10"  {{#if system.lesson_plan.progress.progres2_10}}checked{{/if}}>
+                    </label>
+                </div>
+                <div class="checkbox-container ">
+                    <label>
+                        <div class="progress checkbox">
+                        <input  type="checkbox" name="system.lesson_plan.progress.progres3_1"  {{#if system.lesson_plan.progress.progres3_1}}checked{{/if}}>
+                        </div>
+                    </label>
+                   
+                    <label class="checkbox-custom" for="checkbox-1">
+                        <input class="red-bold-checkbox" type="checkbox" id="checkbox-1" name="system.lesson_plan.progress.progres3_2"  {{#if system.lesson_plan.progress.progres3_2}}checked{{/if}} >
+                    </label>
+                    <label>
+                        <input type="checkbox"name="system.lesson_plan.progress.progres3_3"  {{#if system.lesson_plan.progress.progres3_3}}checked{{/if}}>
+                    </label>
+                    <label>
+                        <input type="checkbox"name="system.lesson_plan.progress.progres3_4"  {{#if system.lesson_plan.progress.progres3_4}}checked{{/if}}>
+                    </label>
+                    <label>
+                        <input type="checkbox" name="system.lesson_plan.progress.progres3_5"  {{#if system.lesson_plan.progress.progres3_5}}checked{{/if}}>
+                    </label>
+                    <label >
+                        <input class="red-bold-checkbox" type="checkbox"name="system.lesson_plan.progress.progres3_6"  {{#if system.lesson_plan.progress.progres3_6}}checked{{/if}}>
+                    </label>
+                    <label>
+                        <input type="checkbox"name="system.lesson_plan.progress.progres3_7"  {{#if system.lesson_plan.progress.progres3_7}}checked{{/if}}>
+                    </label>
+                    <label>
+                        <input type="checkbox"name="system.lesson_plan.progress.progres3_8"  {{#if system.lesson_plan.progress.progres3_8}}checked{{/if}}>
+                    </label>
+                    <label>
+                        <input type="checkbox"name="system.lesson_plan.progress.progres3_9"  {{#if system.lesson_plan.progress.progres3_9}}checked{{/if}}>
+                    </label>
+                    <label >
+                        <input class="red-bold-checkbox" type="checkbox"name="system.lesson_plan.progress.progres3_10"  {{#if system.lesson_plan.progress.progres3_10}}checked{{/if}}>
+                    </label>
+                </div>
+            </fieldset>
+        </div>
+    </section>
+          
+</body>
+</form>

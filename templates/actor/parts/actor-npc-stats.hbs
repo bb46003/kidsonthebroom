@@ -1,0 +1,29 @@
+<section class="flexcol">
+  {{#each system.stats as |stat key|}}
+    <Fieldset class="flexrow">
+      <legend class="flexcol-legend">{{key}}</legend>
+      <div class="flexrow flex-group-center atribiute">
+        <select name="system.stats.{{key}}.value">
+          {{#select stat.value}}
+          <option value="20">d20</option>
+          <option value="12">d12</option>
+          <option value="10">d10</option>
+          <option value="8">d8</option>
+          <option value="6">d6</option>
+          <option value="4">d4</option>
+          {{/select}}
+        </select>
+        <Fieldset class="flexrow flex-group-center">
+          <legend>Atrybut</legend>
+          <span class="ability-mod rollable" data-roll={{stat.value}} data-mod={{stat.stat}} data-ism=0 data-label="Rzut na atrybut {{key}}"><i class="{{#is stat.value '20'}}fas fa-dice-d20{{/is}}{{#is stat.value '12'}}fas fa-dice-d12{{/is}}{{#is stat.value '10'}}fas fa-dice-d10{{/is}}{{#is stat.value '8'}}fas fa-dice-d8{{/is}}{{#is stat.value '6'}}fas fa-dice-d6{{/is}}{{#is stat.value '4'}}fas fa-dice-d4{{/is}}"></i></span>
+          <input type="text" name="system.stats.{{key}}.stat" value="{{stat.stat}}" data-dtype="String"/>
+        </Fieldset>
+        <Fieldset class="flexrow flex-group-center">
+          <legend>Magia</legend>
+          <span class="ability-mod rollable"  data-roll={{stat.value}} data-mod={{stat.magic}} data-ism=1 data-label="Rzut na magie z arybutu {{key}}"><i class="fas fa-wand-magic"></i></span>
+          <input type="text" name="system.stats.{{key}}.magic" value="{{stat.magic}}" data-dtype="String"/>
+        </Fieldset>
+      </div>
+    </Fieldset>
+  {{/each}}
+</section>

@@ -1,0 +1,154 @@
+{
+  "Actor": {
+    "types": ["character", "npc"],
+    "templates": {
+      "base": {
+        "stats": {
+          "Bójka": {
+           "value":"4",
+            "stat": 0,
+            "magic": 0
+          },
+          "Hart": {
+           "value":"4",
+            "stat": 0,
+            "magic": 0
+          },
+          "Lotność": {
+           "value":"4",
+            "stat": 0,
+            "magic": 0
+          },
+          "Mięśnie": {
+           "value":"4",
+            "stat": 0,
+            "magic": 0
+          },
+          "Rozum": {
+           "value":"4",
+            "stat": 0,
+            "magic": 0
+          },
+          "Urok": {
+           "value":"4",
+            "stat": 0,
+            "magic": 0
+          }
+        },
+        "description": ""
+      }
+    },
+    "character": {
+      "templates": ["base"],
+      "trope": "",
+      "age": "",
+      "pronouns": "",
+      "fear": "",
+      "motivation": "",
+      "grade":"",
+      "broom": {
+        "name:": "",
+        "look": "",
+        "mechanicalbenifit": ""
+      },
+      "wand": {
+        "wood": "",
+        "core": ""
+      },
+      "animalfamiliar":{
+        "spiecies":"",
+        "name":","
+      },
+      "house": "",
+      "schoolbag": "",
+      "adversity": 3,
+      "tropequestions": "",
+      "strengths": "",
+      "lesson_plan":{
+        "topic":{
+          "labelt1":"",
+          "labelt2":"",
+          "labelt3":"",
+          "indexpr":4,
+          "indexpp":4,
+          "indexppo":4,
+          "indexpn":4,
+          "indexwr":4,
+          "indexwp":4,
+          "indexwpo":4,
+          "indexwn":4,
+          "indexsr":4,
+          "indexsp":4,
+          "indexspo":4,
+          "indexsn":4,
+          "indexcr":4,
+          "indexcp":4,
+          "indexcpo":4,
+          "indexcn":4, 
+          "indexpir":4,
+          "indexpip":4,
+          "indexpipo":4,
+          "indexpin":4
+                 
+        
+        },
+        "progress":{
+          "progres1_1":false,
+          "progres1_2":false,
+          "progres1_3":false,
+          "progres1_4":false,
+          "progres1_5":false,
+          "progres1_6":false,
+          "progres1_7":false,
+          "progres1_8":false,
+          "progres1_9":false,
+          "progres1_10":false,
+          "progres2_1":false,
+          "progres2_2":false,
+          "progres2_3":false,
+          "progres2_4":false,
+          "progres2_5":false,
+          "progres2_6":false,
+          "progres2_7":false,
+          "progres2_8":false,
+          "progres2_9":false,
+          "progres2_10":false,
+          "progres3_1":false,
+          "progres3_2":false,
+          "progres3_3":false,
+          "progres3_4":false,
+          "progres3_5":false,
+          "progres3_6":false,
+          "progres3_7":false,
+          "progres3_8":false,
+          "progres3_9":false,
+          "progres3_10":false
+
+        }
+        
+        
+       
+
+      }
+    },
+    "npc": {
+      "templates": ["base"]
+    }
+    
+  },
+  "Item": {
+    "types": ["item"],
+    "templates": {
+      "base": {
+        "description": ""
+      }
+    },
+   
+       
+      
+    
+    "item": {
+      "templates": ["base"]
+    }
+  }
+}
