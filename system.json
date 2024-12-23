@@ -20,8 +20,8 @@
   "socket": true,
   "primaryTokenAttribute": "null",
   "secondaryTokenAttribute": "null",
-  "url": "https://github.com/Singularity-Lathe-VTT/kids-on-brooms",
-  "manifest": "https://raw.githubusercontent.com/Singularity-Lathe-VTT/kids-on-brooms/main/system.json",
-  "download": "https://github.com/Singularity-Lathe-VTT/kids-on-brooms/archive/refs/tags/v1.0.5.zip",
-  "license": "LICENSE.txt"
+  "url": "https://github.com/bb46003/kidsonthebroom/tree/main",
+  "manifest": "https://raw.githubusercontent.com/bb46003/kidsonthebroom/refs/heads/main/system.json",
+  "download": "https://github.com/bb46003/kidsonthebroom/archive/refs/heads/main.zip"
+
 }
