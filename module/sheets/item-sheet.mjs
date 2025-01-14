@@ -17,7 +17,7 @@ export class KidsOnBroomsItemSheet extends ItemSheet {
   /** @override */
   get template() {
     
-    const path = "systems/kidsonbrooms-BB/templates/item";
+    const path = "systems/kidsonbrooms/templates/item";
     // Return a single sheet for all item types.
     // return `${path}/item-sheet.html`;
 
