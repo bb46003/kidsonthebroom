@@ -10,7 +10,7 @@ export class KidsOnBroomsActorSheet extends ActorSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["kidsonbrooms", "sheet", "actor"],
-      template: "systems/kidsonbrooms-BB/templates/actor/actor-sheet.hbs",
+      template: "systems/kidsonbrooms/templates/actor/actor-sheet.hbs",
       width: 800,
       height: 900,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "features" }]
