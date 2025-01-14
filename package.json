@@ -18,7 +18,6 @@
     "gulp": "^4",
     "gulp-autoprefixer": "^8",
     "gulp-sass": "^4",
-    "gulp-sourcemaps": "^3",
-    "kidsonbrooms": "file:"
+    "gulp-sourcemaps": "^3"
   }
 }

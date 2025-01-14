@@ -7,12 +7,12 @@
   return loadTemplates([
 
     // Actor partials.
-    "systems/kidsonbrooms/templates/actor/parts/actor-features.hbs",
-    "systems/kidsonbrooms/templates/actor/parts/actor-adversity.hbs",
-    "systems/kidsonbrooms/templates/actor/parts/actor-stats.hbs",
-    "systems/kidsonbrooms/templates/actor/parts/actor-npc-stats.hbs",
-    "systems/kidsonbrooms/templates/actor/parts/actor-lesson_plan.hbs",
-    "systems/kidsonbrooms/templates/actor/parts/actor-shoolbag.hbs"
+    "systems/kidsonbrooms-BB/templates/actor/parts/actor-features.hbs",
+    "systems/kidsonbrooms-BB/templates/actor/parts/actor-adversity.hbs",
+    "systems/kidsonbrooms-BB/templates/actor/parts/actor-stats.hbs",
+    "systems/kidsonbrooms-BB/templates/actor/parts/actor-npc-stats.hbs",
+    "systems/kidsonbrooms-BB/templates/actor/parts/actor-lesson_plan.hbs",
+    "systems/kidsonbrooms-BB/templates/actor/parts/actor-shoolbag.hbs"
     //"systems/kidsonbrooms-BB/templates/actor/parts/actor-trope.hbs",
   ]);
   

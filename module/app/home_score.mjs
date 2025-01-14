@@ -19,7 +19,7 @@ export class HomeScore extends Application {
             id: "home-score-app",
             popOut: false,
             resizable: false,
-            template: "systems/kidsonbrooms/templates/apps/home_score-tracker.hbs",
+            template: "systems/kidsonbrooms-BB/templates/apps/home_score-tracker.hbs",
             title: "Home Score",
             width: "auto",
         });
