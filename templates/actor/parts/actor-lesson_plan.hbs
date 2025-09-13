@@ -15,10 +15,10 @@
             <td> 
                 <select name="system.lesson_plan.topic.indexpr" >
           
-          <option value="0"{{#if system.lesson_plan.topic.indexp === "0"}}selected{{/if}}>{{system.lesson_plan.topic.labelt1}}</option>
-          <option value="1"{{#if system.lesson_plan.topic.indexp === "1"}}selected{{/if}}>{{system.lesson_plan.topic.labelt2}}</option>
-          <option value="2"{{#if system.lesson_plan.topic.indexp === "2"}}selected{{/if}}>{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4"{{#if system.lesson_plan.topic.indexp === "4"}}selected{{/if}}>Brak zajęć</option>           
+          <option value="0"{{#ifCond system.lesson_plan.topic.indexp "===" "0"}}selected{{/ifCond}}>{{system.lesson_plan.topic.labelt1}}</option>
+          <option value="1"{{#ifCond system.lesson_plan.topic.indexp "===" "1"}}selected{{/ifCond}}>{{system.lesson_plan.topic.labelt2}}</option>
+          <option value="2"{{#ifCond system.lesson_plan.topic.indexp "===" "2"}}selected{{/ifCond}}>{{system.lesson_plan.topic.labelt3}}</option>
+          <option value="4"{{#ifCond system.lesson_plan.topic.indexp "===" "4"}}selected{{/ifCond}}>Brak zajęć</option>           
           
         </select></td>
             <td><select name="system.lesson_plan.topic.indexwr">

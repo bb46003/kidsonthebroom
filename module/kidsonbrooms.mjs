@@ -152,7 +152,34 @@ Handlebars.registerHelper('progress',function(value){
 Handlebars.registerHelper("enrichHtmlHelper", function(rawText) {
   return TextEditor.enrichHTML(rawText, {async: false});
 });
-
+Handlebars.registerHelper("ifCond", function(v1, operator, v2, options) {
+		switch (operator) {
+			case "==":
+				// eslint-disable-next-line eqeqeq
+				return v1 == v2 ? options.fn(this) : options.inverse(this);
+			case "===":
+				return v1 === v2 ? options.fn(this) : options.inverse(this);
+			case "!=":
+				// eslint-disable-next-line eqeqeq
+				return v1 != v2 ? options.fn(this) : options.inverse(this);
+			case "!==":
+				return v1 !== v2 ? options.fn(this) : options.inverse(this);
+			case "<":
+				return v1 < v2 ? options.fn(this) : options.inverse(this);
+			case "<=":
+				return v1 <= v2 ? options.fn(this) : options.inverse(this);
+			case ">":
+				return v1 > v2 ? options.fn(this) : options.inverse(this);
+			case ">=":
+				return v1 >= v2 ? options.fn(this) : options.inverse(this);
+			case "&&":
+				return v1 && v2 ? options.fn(this) : options.inverse(this);
+			case "||":
+				return v1 || v2 ? options.fn(this) : options.inverse(this);
+			default:
+				return options.inverse(this);
+		}
+	});
 
 
 Hooks.once("ready", async function() {

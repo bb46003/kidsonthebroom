@@ -19,7 +19,7 @@ export class KidsOnBroomsActorSheet extends ActorSheet {
 
   /** @override */
   get template() {
-    return `systems/kidsonbrooms-BB/templates/actor/actor-${this.actor.type}-sheet.hbs`;
+    return `systems/kidsonbrooms/templates/actor/actor-${this.actor.type}-sheet.hbs`;
   }
 
   /* -------------------------------------------- */
