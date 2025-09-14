@@ -4,18 +4,20 @@
   <header class="sheet-header">
     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
     <div class="header-fields">
-      <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>    
+      <h1 class="charname">
+        <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "KIDSONBROOMS.NAME"}}"/>
+      </h1>    
     </div>
   </header>
 
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
     {{!-- Default tab is specified in actor-sheet.mjs --}}
-    <a class="item" data-tab="features">Główna</a>
-    <a class="item" data-tab="schoolbag">Tornister</a>
-    <a class="item" data-tab="strengths">Zalety</a>
-    <a class="item" data-tab="trope">Pytania z archetypu</a>
-    <a class="item" data-tab="Lesson_plan">Plan Lekcji</a>
+    <a class="item" data-tab="features">{{localize "KIDSONBROOMS.tabMain"}}</a>
+    <a class="item" data-tab="schoolbag">{{localize "KIDSONBROOMS.tabSchoolbag"}}</a>
+    <a class="item" data-tab="strengths">{{localize "KIDSONBROOMS.tabStrengths"}}</a>
+    <a class="item" data-tab="trope">{{localize "KIDSONBROOMS.tabTropeQuestions"}}</a>
+    <a class="item" data-tab="Lesson_plan">{{localize "KIDSONBROOMS.tabLessonPlan"}}</a>
   </nav>
 
   {{!-- Sheet Body --}}
@@ -30,21 +32,19 @@
         </section>
 
         <aside class="sidebar">
-          
           {{> "systems/kidsonbrooms/templates/actor/parts/actor-stats.hbs"}}
-          
         </aside>
-
       </section>
     </div>
+
     {{!-- Schoolbag Tab --}}
     <div class="tab features" data-group="primary" data-tab="schoolbag">
       {{editor schoolbagValue
         button=true
-	      editable=editable
-	      owner=owner
-	      target="system.schoolbag"
-       }}
+        editable=editable
+        owner=owner
+        target="system.schoolbag"
+      }}
     </div>
 
     {{!-- Strengths Tab --}}
@@ -56,10 +56,10 @@
     <div class="tab features" data-group="primary" data-tab="trope">
       {{editor tropequestionsValue target="system.tropequestions" button=true owner=owner editable=editable}}
     </div>
-    {{!-- Lesson_plan Questions Tab --}}
+
+    {{!-- Lesson Plan Tab --}}
     <div class="tab features" data-group="primary" data-tab="Lesson_plan">
-        {{> "systems/kidsonbrooms/templates/actor/parts/actor-lesson_plan.hbs"}}
+      {{> "systems/kidsonbrooms/templates/actor/parts/actor-lesson_plan.hbs"}}
     </div>
   </section>
 </form>
-

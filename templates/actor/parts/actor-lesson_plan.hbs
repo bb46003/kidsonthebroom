@@ -3,22 +3,23 @@
 <body>
     <table>
         <tr>
-            <th></th>
-            <th style="text-align: center;">Poniedziałek</th>
-            <th style="text-align: center;">Wtorek</th>
-            <th style="text-align: center;">Środa</th>
-            <th style="text-align: center;">Czwartek</th>
-            <th style="text-align: center;">Piątek</th>            
+ <th></th>
+<th style="text-align: center;">{{localize "KIDSONBROOMS.monday"}}</th>
+<th style="text-align: center;">{{localize "KIDSONBROOMS.tuesday"}}</th>
+<th style="text-align: center;">{{localize "KIDSONBROOMS.wednesday"}}</th>
+<th style="text-align: center;">{{localize "KIDSONBROOMS.thursday"}}</th>
+<th style="text-align: center;">{{localize "KIDSONBROOMS.friday"}}</th>
+     
         </tr>
         <tr>
-            <td>Rano </td>
+            <td>{{localize "KIDSONBROOMS.morning"}} </td>
             <td> 
                 <select name="system.lesson_plan.topic.indexpr" >
           
           <option value="0"{{#ifCond system.lesson_plan.topic.indexp "===" "0"}}selected{{/ifCond}}>{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1"{{#ifCond system.lesson_plan.topic.indexp "===" "1"}}selected{{/ifCond}}>{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2"{{#ifCond system.lesson_plan.topic.indexp "===" "2"}}selected{{/ifCond}}>{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4"{{#ifCond system.lesson_plan.topic.indexp "===" "4"}}selected{{/ifCond}}>Brak zajęć</option>           
+          <option value="4"{{#ifCond system.lesson_plan.topic.indexp "===" "4"}}selected{{/ifCond}}>{{localize "KIDSONBROOMS.noClass"}}</option>           
           
         </select></td>
             <td><select name="system.lesson_plan.topic.indexwr">
@@ -26,7 +27,7 @@
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
             <td><select name="system.lesson_plan.topic.indexsr">
@@ -34,7 +35,7 @@
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
             
@@ -43,7 +44,7 @@
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
             <td><select name="system.lesson_plan.topic.indexpir">
@@ -51,20 +52,20 @@
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
         
         </tr>
         <tr>
-            <td>Po południu</td>
+            <td>{{localize "KIDSONBROOMS.afternoon"}}</td>
             <td> 
                 <select name="system.lesson_plan.topic.indexpp">
           {{#select system.lesson_plan.topic.indexpp}}
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
             <td><select name="system.lesson_plan.topic.indexwp">
@@ -72,7 +73,7 @@
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
             <td><select name="system.lesson_plan.topic.indexsp">
@@ -80,7 +81,7 @@
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
             
@@ -89,7 +90,7 @@
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
             <td><select name="system.lesson_plan.topic.indexpip">
@@ -97,20 +98,20 @@
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
             
         </tr>
         <tr>
-            <td>Zajęcia pozalekcyjne</td>
+            <td>{{localize "KIDSONBROOMS.extracurricular"}}</td>
           <td> 
                 <select name="system.lesson_plan.topic.indexppo">
           {{#select system.lesson_plan.topic.indexppo}}
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
             <td><select name="system.lesson_plan.topic.indexwpo">
@@ -118,7 +119,7 @@
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
             <td><select name="system.lesson_plan.topic.indexspo">
@@ -126,7 +127,7 @@
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
             
@@ -135,7 +136,7 @@
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
             <td><select name="system.lesson_plan.topic.indexpipo">
@@ -143,20 +144,20 @@
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
             
         </tr>
         <tr>
-            <td>Noc</td>
+            <td>{{localize "KIDSONBROOMS.night"}}</td>
            <td> 
                 <select name="system.lesson_plan.topic.indexpn">
           {{#select system.lesson_plan.topic.indexpn}}
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
             <td><select name="system.lesson_plan.topic.indexwn">
@@ -164,7 +165,7 @@
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
             <td><select name="system.lesson_plan.topic.indexsn">
@@ -172,7 +173,7 @@
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
             
@@ -181,7 +182,7 @@
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
             <td><select name="system.lesson_plan.topic.indexpin">
@@ -189,7 +190,7 @@
           <option value="0">{{system.lesson_plan.topic.labelt1}}</option>
           <option value="1">{{system.lesson_plan.topic.labelt2}}</option>
           <option value="2">{{system.lesson_plan.topic.labelt3}}</option>
-          <option value="4">Brak zajęć</option>           
+          <option value="4">{{localize "KIDSONBROOMS.noClass"}}</option>           
           {{/select}}
         </select></td>
             
@@ -200,7 +201,7 @@
     <section class="plan_row">
         <div class="plan_column">
             <fieldset class="grid-span-3 resource flexcol" >
-                <legend class="flexcol-legend">Lista Zajęć</legend>
+                <legend class="flexcol-legend">{{localize "KIDSONBROOMS.lessonList"}}</legend>
                 </span><div class="resource-content flexrow lessonname">
                     <input type="text" name="system.lesson_plan.topic.labelt1" value="{{system.lesson_plan.topic.labelt1}}" />
                   </div>
@@ -225,7 +226,7 @@
         
         <div class="plan_column">
             <Fieldset class="flexrow ">
-                <legend class="flexcol-legend">Punkty</legend>
+                <legend class="flexcol-legend">{{localize "KIDSONBROOMS.points"}}</legend>
                 <div class="checkbox-container ">
                     <label>
                         <div class="progress checkbox">

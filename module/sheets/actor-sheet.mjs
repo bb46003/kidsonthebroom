@@ -237,24 +237,24 @@ export class KidsOnBroomsActorSheet extends ActorSheet {
       // Kod HTML dla dialogu
       const htmlContent = `
         <div>
-          <label for="ST">Skala Trudności:</label>
+          <label for="ST">${game.i18n.localize("KIDSONBROOMS.DC")}</label>
           <input type="number" name="ST" value="8">
         </div>
   
         <div>
-          <label for="fear">Modyfikator Strachu:</label>
+          <label for="fear">${game.i18n.localize("KIDSONBROOMS.FEAR_MODIFIER")}</label>
           <input type="number" name="fear" value="0">
         </div>
   
         <div>
-          <label for="zetonyPrzeciwnosci">Żetony Przeciwności:</label>
+          <label for="zetonyPrzeciwnosci">${game.i18n.localize("KIDSONBROOMS.ADVERSITY_TOKENS")}</label>
           <select name="zetonyPrzeciwnosci">
             ${selectOptions}
           </select>
         </div>
   
         <div>
-          <label for="otherz">Inne Modyfikatory:</label>
+          <label for="otherz">${game.i18n.localize("KIDSONBROOMS.OTHERS")}</label>
           <input type="number" name="otherz" value="0">
         </div>
       `;
@@ -262,7 +262,7 @@ export class KidsOnBroomsActorSheet extends ActorSheet {
       // Utworzenie okna dialogowego z callbackiem
       let callbackData = null;
       let dialog = new Dialog({
-        title: "Okno rzutu",
+        title: game.i18n.localize("KIDSONBROOMS.dialog_title"),
         content: htmlContent,
         buttons: {
           ok: {
@@ -281,7 +281,7 @@ export class KidsOnBroomsActorSheet extends ActorSheet {
             }
           }
         },
-        default: "Rzut"
+        default: game.i18n.localize("KIDSONBROOMS.roll")
       });
   
       // Wyrenderowanie okna dialogowego
@@ -290,7 +290,6 @@ export class KidsOnBroomsActorSheet extends ActorSheet {
   }
   
   async _continueRoll(dataset, formData) {
-    console.log(formData);
     let mod = Number(dataset.mod)+Number(formData.zetonyPrzeciwnosci)-Number(formData.fear)+Number(formData.otherz);
     let dicemax = Number(dataset.roll);
     let ismagic = Number(dataset.ism);
@@ -337,13 +336,13 @@ export class KidsOnBroomsActorSheet extends ActorSheet {
     const roll_results=(currentResult>=targetNumber);
     let result_label="";
     if(roll_results===false){
-        result_label="Porażka";
+        result_label=game.i18n.localize("KIDSONBROOMS.Fail");
     }
     else{
-        result_label="Sukces!";
+        result_label=game.i18n.localize("KIDSONBROOMS.Sucess");;
     };
 
-    const msg= `${'<strong>' + dataset.label + '</strong>'}<br>` + `Skali trudności wynosiła: <strong>${targetNumber}</strong><br>` + `Wynik testu to <strong>${result_label}</strong>`;
+    const msg= `${'<strong>' + dataset.label + '</strong>'}<br>` + `${game.i18n.localize("KIDSONBROOMS.Chat_DC")} <strong>${targetNumber}</strong><br>` + `${game.i18n.localize("KIDSONBROOMS.result")} <strong>${result_label}</strong>`;
   
     roll.toMessage({
         flavor: msg,

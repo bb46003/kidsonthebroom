@@ -76,8 +76,15 @@ export default function registerSettings() {
 		default: false,
     config: false,
 		type: Boolean,
-  }
-);
+  });
+    game.settings.register(SYSTEM_ID, "hous_score",{
+    name: "Displey house score",
+		scope: "world",
+		default: false,
+    config: true,
+		type: Boolean,
+  });
+
 
 
 }
@@ -180,10 +187,15 @@ Handlebars.registerHelper("ifCond", function(v1, operator, v2, options) {
 				return options.inverse(this);
 		}
 	});
-
+Handlebars.registerHelper('concat', function(...args) {
+  // The last argument is always Handlebars options, so ignore it
+  args.pop();
+  return args.join('');
+});
 
 Hooks.once("ready", async function() {
 const SYSTEM_ID = "kidsonbrooms";
+if(game.settings.get(SYSTEM_ID, "hous_score")){
  await game.kidsonbrooms.HomeScore.initialise()
 
       const houseSettings = [
@@ -205,7 +217,7 @@ const SYSTEM_ID = "kidsonbrooms";
         }        
       })
       
-    
+}
       // Hide all images with class 'imgflag'
      
 })
