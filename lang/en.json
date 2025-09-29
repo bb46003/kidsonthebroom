@@ -60,6 +60,7 @@
     "Chat_DC": "Dificulty Class was: ",
     "result": "Test result is: ",
     "roll": "Roll",
-    "dialog_title": "Roll Dialog"
+    "dialog_title": "Roll Dialog",
+    "Features": "Features"
   }
 }
