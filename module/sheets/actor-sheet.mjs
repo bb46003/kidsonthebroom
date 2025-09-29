@@ -102,13 +102,13 @@ export class KidsOnBroomsActorSheet extends ActorSheet {
     super.activateListeners(html);
     
     html.find(".lessonname input[type='text']").change(async ev=> {
-      const newvalue = $(ev).val();
-      const nameAttributeValue = $(ev).attr('name');
+      const newvalue = $(ev.currentTarget).val();
+      const nameAttributeValue = $(ev.currentTarget).attr('name');
       
       const updateData = {};
       updateData[nameAttributeValue] = newvalue;
       
-      await this.actor.updateEmbeddedDocuments(updateData);
+      await this.actor.update(updateData);
   });
   html.find("select[name='data.stats.{{key}}.value']").change(async function() {
     const newvalue = $(this).val();
@@ -117,7 +117,7 @@ export class KidsOnBroomsActorSheet extends ActorSheet {
     const updateData = {};
     updateData[nameAttributeValue] = newvalue;
     
-    await this.actor.updateEmbeddedDocuments(updateData);
+    await this.actor.update(updateData);
 });
 
     // Render the item sheet for viewing/editing prior to the editable check.
