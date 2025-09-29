@@ -19,7 +19,7 @@ export class HomeScore extends Application {
             id: "home-score-app",
             popOut: false,
             resizable: false,
-            template: "systems/kidsonbrooms/templates/apps/home_score-tracker.hbs",
+            template: "systems/kidsonthebroom/templates/apps/home_score-tracker.hbs",
             title: "Home Score",
             width: "auto",
         });
@@ -27,7 +27,7 @@ export class HomeScore extends Application {
 
     getData() {
         super.getData();
-        const SYSTEM_ID = "kidsonbrooms";
+        const SYSTEM_ID = "kidsonthebroom";
         this.data.points_slytherin = game.settings.get(SYSTEM_ID, "points_slytherin");
         this.data.points_ravenclaw = game.settings.get(SYSTEM_ID, "points_ravenclaw");
         this.data.points_hufflepuff = game.settings.get(SYSTEM_ID, "points_hufflepuff");
@@ -72,17 +72,17 @@ export class HomeScore extends Application {
      
         
 
-        let currentPoints = game.settings.get("kidsonbrooms", `points_${house.toLowerCase()}`);
+        let currentPoints = game.settings.get("kidsonthebroom", `points_${house.toLowerCase()}`);
         let newPoints = currentPoints + inputScore;
 
-        await game.settings.set("kidsonbrooms", `points_${house.toLowerCase()}`, newPoints);
+        await game.settings.set("kidsonthebroom", `points_${house.toLowerCase()}`, newPoints);
         HomeScore._instance.data[`points_${house.toLowerCase()}`] = newPoints;
 
         await HomeScore.updatePoints();
     }
 
     static async updatePoints() {
-        const SYSTEM_ID = "kidsonbrooms";
+        const SYSTEM_ID = "kidsonthebroom";
         const houseSettings = [
             { name: "gryffindor", value: HomeScore._instance.data.points_gryffindor || 0 },
             { name: "slytherin", value: HomeScore._instance.data.points_slytherin || 0 },

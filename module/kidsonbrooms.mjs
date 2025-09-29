@@ -17,7 +17,7 @@ export default function registerSettings() {
 	//  INTERNAL SETTINGS
 	// -------------------
 	//
-  const SYSTEM_ID = "kidsonbrooms";
+  const SYSTEM_ID = "kidsonthebroom";
 	game.settings.register(SYSTEM_ID, "points_slytherin", {
 		name: "points_slytherin",
 		scope: "world",
@@ -120,9 +120,9 @@ Hooks.once('init',  function() {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("kidsonbrooms", KidsOnBroomsActorSheet, { makeDefault: true });
+  Actors.registerSheet("kidsonthebroom", KidsOnBroomsActorSheet, { makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("kidsonbrooms", KidsOnBroomsItemSheet, { makeDefault: true });
+  Items.registerSheet("kidsonthebroom", KidsOnBroomsItemSheet, { makeDefault: true });
  
   
   // Preload Handlebars templates.
@@ -194,7 +194,7 @@ Handlebars.registerHelper('concat', function(...args) {
 });
 
 Hooks.once("ready", async function() {
-const SYSTEM_ID = "kidsonbrooms";
+const SYSTEM_ID = "kidsonthebroom";
 if(game.settings.get(SYSTEM_ID, "hous_score")){
  await game.kidsonbrooms.HomeScore.initialise()
 
