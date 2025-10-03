@@ -2,7 +2,7 @@
   "id": "kidsonthebroom",
   "title": "Kids On Brooms - moja wersja",
   "description": "The Kids On Brooms system for FoundryVTT!",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "compatibility": {
       "minimum": "12",
       "verified": "13.348"

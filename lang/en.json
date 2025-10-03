@@ -6,7 +6,7 @@
     "EffectEdit": "Edit Effect",
     "EffectDelete": "Delete Effect",
     "Add": "Add",
-    "ADVERSITY_TOKEN_HINT": "You start game with 3 Tokens, You gain 1 after failed test.",
+    "ADVERSITY_TOKEN_HINT": "You start game with 3 Tokens, You gain 1 after failing.",
     "YOUR_CHARACTER": "Your Character",
     "AGE": "Age",
     "PRONOUNS": "Pronouns",
@@ -24,7 +24,7 @@
     "WAND_CORE": "Wand Core",
     "WAND_WOOD": "Wand Wood",
     "YOUR_PET": "Your Pet",
-    "YOUR_PET_SPIECES": "Pet spieces",
+    "YOUR_PET_SPIECES": "Pet species",
     "YOUR_PET_NAME": "Pet Name",
     "monday": "Monday",
     "tuesday": "Tuesday",
@@ -52,15 +52,17 @@
     "Mięśnie": "Brawn",
     "Rozum": "Brain",
     "Urok": "Charm",
-    "DC": "Difculty Class: ",
+    "DC": "Difficulty Class: ",
     "FEAR_MODIFIER": "Fear modifier: ",
     "OTHERS": "Other modifiers: ",
     "Fail": "Fail",
-    "Sucess": "Sucess",
+    "Sucess": "Success",
     "Chat_DC": "Dificulty Class was: ",
     "result": "Test result is: ",
     "roll": "Roll",
     "dialog_title": "Roll Dialog",
-    "Features": "Features"
+    "Features": "Features",
+    "ROLL_FOR_STATS": "Roll for stat",
+    "ROLL_FOR_MAGIC": "Roll for magic with stat"
   }
 }
