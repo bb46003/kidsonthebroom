@@ -1,366 +1,97 @@
-import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/effects.mjs";
+const { api, sheets } = foundry.applications;
 
-/**
- * Extend the basic ActorSheet with some very simple modifications
- * @extends {ActorSheet}
- */
-export class KidsOnBroomsActorSheet extends ActorSheet {
+export class StudentSheet extends api.HandlebarsApplicationMixin(
+  sheets.ActorSheetV2,
+) {
+  constructor(...args) {
+    super(...args);
 
+    /** @type {CharacterActor} */
+    this.actor;
+  }
+  static DEFAULT_OPTIONS = {
+    classes: ["kotb-sheet"],
+    position: { width: 1020, height: 850 },
+    actions: {
+    },
+    form: {
+      submitOnChange: true,
+    },
+  };
+  static PARTS = {
+    main: {
+      id: "main",
+      template: `systems/kotb/templates/actor/actor-studnet-sheet.hbs`,
+    },
+    nav: {
+      template: "systems/kotb/templates/actor/parts/actor-studnet-nav.hbs",
+    },
+  };
+  static TABS = {
+    items: {
+      tabs: [
+      ],
+      initial: "",
+    },
+  };
   /** @override */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["kidsonbrooms", "sheet", "actor"],
-      template: "systems/kidsonthebroom/templates/actor/actor-sheet.hbs",
-      width: 800,
-      height: 900,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "features" }]
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    Object.assign(context, {
+      actor: this.actor,
+      source: this.actor.toObject(),
+      system: this.actor.system,
+      fields: this.actor.schema.fields,
+      systemFields: this.actor.system.schema.fields,
     });
-  }
-
-  /** @override */
-  get template() {
-    return `systems/kidsonthebroom/templates/actor/actor-${this.actor.type}-sheet.hbs`;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  async getData() {
-    const context = await super.getData();
-    const actorData = this.actor.toObject(false);
-    context.system = actorData.system;
-    context.flags = actorData.flags;  
-    if (actorData.type == 'character') {
-      this._prepareItems();
-      this._prepareCharacterData();
-    }    
-        if (actorData.type == 'npc') {
-      this._prepareItems(context);
-    }
-       context.rollData = context.actor.getRollData();
-    context.effects = prepareActiveEffectCategories(this.actor.effects);
-    context.schoolbagValue = await TextEditor.enrichHTML(context.system.schoolbag, {
-			secrets: context.editable,
-      async: true      			
-		});  
-    context.strengthsValue = await TextEditor.enrichHTML(context.system.strengths, {
-			secrets: context.editable,
-      async: true      			
-		}); 
-    context.tropequestionsValue = await TextEditor.enrichHTML(context.system.tropequestions, {
-			secrets: context.editable,
-      async: true      			
-		}); 
-		return context;    
-  }
-
-  /**
-   * Organize and classify Items for Character sheets.
-   *
-   * @param {Object} actorData The actor to prepare.
-   *
-   * @return {undefined}
-   */
-  _prepareCharacterData() {
-   
-  }
-
-  /**
-   * Organize and classify Items for Character sheets.
-   *
-   * @param {Object} actorData The actor to prepare.
-   *
-   * @return {undefined}
-   */
-  _prepareItems() {
-    // Initialize containers.
-    const gear = [];
-    const features = [];
-    let context = this.actor.items
-    // Iterate through items, allocating to containers
-    for (let i of this.actor.items) {
-      i.img = i.img || DEFAULT_TOKEN;
-      // Append to gear.
-      if (i.type === 'item') {
-        gear.push(i);
-      }
-      // Append to features.
-      else if (i.type === 'feature') {
-        features.push(i);
+    async function enrich(html) {
+      if (html) {
+        return await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+          html,
+          {
+            secrets: game.user.isOwner,
+            async: true,
+          },
+        );
+      } else {
+        return html;
       }
     }
-
-    // Assign and return
-    context.gear = gear;
-    context.features = features;
-   }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  activateListeners(html) {
-    super.activateListeners(html);
-    
-    html.find(".lessonname input[type='text']").change(async ev=> {
-      const newvalue = $(ev.currentTarget).val();
-      const nameAttributeValue = $(ev.currentTarget).attr('name');
-      
-      const updateData = {};
-      updateData[nameAttributeValue] = newvalue;
-      
-      await this.actor.update(updateData);
-  });
-  html.find("select[name='data.stats.{{key}}.value']").change(async function() {
-    const newvalue = $(this).val();
-    const nameAttributeValue = $(this).attr('name');
-    
-    const updateData = {};
-    updateData[nameAttributeValue] = newvalue;
-    
-    await this.actor.update(updateData);
-});
-
-    // Render the item sheet for viewing/editing prior to the editable check.
-    html.find('.item-edit').click(ev => {
-      const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.items.get(li.data("itemId"));
-      item.sheet.render(true);
-    });
-
-    // -------------------------------------------------------------
-    // Everything below here is only needed if the sheet is editable
-    if (!this.isEditable) return;
-
-    // Add Inventory Item
-    html.find('.item-create').click(this._onItemCreate.bind(this));
-
-    // Delete Inventory Item
-    html.find('.item-delete').click(ev => {
-      const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.items.get(li.data("itemId"));
-      item.delete();
-      li.slideUp(200, () => this.render(false));
-    });
-
-    // Active Effect management
-    html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
-
-    // Rollable abilities.
-    html.find('.rollable').click(this._onRoll.bind(this));
-
-    // Drag events for macros.
-    if (this.actor.owner) {
-      let handler = ev => this._onDragStart(ev);
-      html.find('li.item').each((i, li) => {
-        if (li.classList.contains("inventory-header")) return;
-        li.setAttribute("draggable", true);
-        li.addEventListener("dragstart", handler, false);
-      });
-    }
- 
-      
-      
-    
-    /* -------------------------------------------- */
-    /*  Ready Hook                                  */
-    /* -------------------------------------------- */
-  
-    
-      // Define a function to be called when the checkbox state changes
-      
-    
-  }
-
-  /**
-   * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
-   * @param {Event} event   The originating click event
-   * @private
-   */
-  async _onItemCreate(event) {
-    event.preventDefault();
-    const header = event.currentTarget;
-    // Get the type of item to create.
-    const type = header.dataset.type;
-    // Grab any data associated with this control.
-    const data = duplicate(header.dataset);
-    // Initialize a default name.
-    const name = `New ${type.capitalize()}`;
-    // Prepare the item object.
-    const itemData = {
-      name: name,
-      type: type,
-      data: data
+    context.tropequestions = {
+      value: this.actor.system.tropequestions,
+      enriched: await enrich(this.actor.system.tropequestions),
+      field: this.actor.system.schema.fields.tropequestions,
+    };    
+    context.strengths = {
+      value: this.actor.system.strengths,
+      enriched: await enrich(this.actor.system.strengths),
+      field: this.actor.system.schema.fields.strengths,
+    };    
+    context.equipment = {
+      value: this.actor.system.equipment,
+      enriched: await enrich(this.actor.system.equipment),
+      field: this.actor.system.schema.fields.equipment,
+    };    
+    context.description = {
+      value: this.actor.system.description,
+      enriched: await enrich(this.actor.system.description),
+      field: this.actor.system.schema.fields.description,
+    };    
+    context.notes = {
+      value: this.actor.system.notes,
+      enriched: await enrich(this.actor.system.notes),
+      field: this.actor.system.schema.fields.notes,
     };
-    // Remove the type from the dataset since it's in the itemData.type prop.
-    delete itemData.data["type"];
-
-    // Finally, create the item!
-    return await Item.create(itemData, {parent: this.actor});
-  }
-
-  /**
-   * Handle clickable rolls.
-   * @param {Event} event   The originating click event
-   * @private
-   */
-  async _onRoll(event) {
-    event.preventDefault();
-    const element = event.currentTarget;
-    const dataset = element.dataset;
-  
-    // Handle item rolls.
-    if (dataset.rollType) {
-      if (dataset.rollType == 'item') {
-        const itemId = element.closest('.item').dataset.itemId;
-        const item = this.actor.items.get(itemId);
-        if (item) return item.roll();
-      }
-    }
-  
-    // Handle rolls that supply the formula directly.
-    if (dataset.roll) {
-      let zetony = this.actor.system.adversity;
-  
-      // Ilość opcji zależna od wartości zewnętrznej
-      var iloscOpcji = zetony; // Przykładowa ilość opcji, możesz dostosować zgodnie z potrzebami
-  
-      // Przygotowanie danych dla opcji
-      var options = [];
-      let i = 0;
-      for (i; i <= iloscOpcji; i++) {
-        options.push(i);
-      }
-  
-      // Dodanie opcji do selektora
-      var selectOptions = options.map(option => `<option value="${option}">${option}</option>`).join('');
-  
-      // Kod HTML dla dialogu
-      const htmlContent = `
-        <div>
-          <label for="ST">${game.i18n.localize("KIDSONBROOMS.DC")}</label>
-          <input type="number" name="ST" value="8">
-        </div>
-  
-        <div>
-          <label for="fear">${game.i18n.localize("KIDSONBROOMS.FEAR_MODIFIER")}</label>
-          <input type="number" name="fear" value="0">
-        </div>
-  
-        <div>
-          <label for="zetonyPrzeciwnosci">${game.i18n.localize("KIDSONBROOMS.ADVERSITY_TOKENS")}</label>
-          <select name="zetonyPrzeciwnosci">
-            ${selectOptions}
-          </select>
-        </div>
-  
-        <div>
-          <label for="otherz">${game.i18n.localize("KIDSONBROOMS.OTHERS")}</label>
-          <input type="number" name="otherz" value="0">
-        </div>
-      `;
-  
-      // Utworzenie okna dialogowego z callbackiem
-      let callbackData = null;
-      let dialog = new Dialog({
-        title: game.i18n.localize("KIDSONBROOMS.dialog_title"),
-        content: htmlContent,
-        buttons: {
-          ok: {
-            label: "OK",
-            callback: async (html) => {
-              // Pobierz dane z formularza
-              callbackData = {
-                ST: html.find('[name="ST"]').val(),
-                fear: html.find('[name="fear"]').val(),
-                zetonyPrzeciwnosci: html.find('[name="zetonyPrzeciwnosci"]').val(),
-                otherz: html.find('[name="otherz"]').val()
-              };
-  
-              // Kontynuuj rzut kostką
-              await this._continueRoll(dataset, callbackData);
-            }
-          }
-        },
-        default: game.i18n.localize("KIDSONBROOMS.roll")
-      });
-  
-      // Wyrenderowanie okna dialogowego
-      await dialog.render(true);
-    }
-  }
-  
-  async _continueRoll(dataset, formData) {
-    let mod = Number(dataset.mod)+Number(formData.zetonyPrzeciwnosci)-Number(formData.fear)+Number(formData.otherz);
-    let dicemax = Number(dataset.roll);
-    let ismagic = Number(dataset.ism);
-    let zetony = this.actor.system.adversity;
-    // Reszta kodu związana z rzutem kostką
-    let f = `d${dicemax}`;
-    let currentResult = 0;
-    const targetNumber = Number(formData.ST);
-    const roll = await new Roll(f).evaluate({ async: true });
-    currentResult=+roll.result+ +mod;
-
-    roll._total=currentResult;
-    let i=0;
-    
-    roll._formula=(`${i+1}d${dicemax}+${mod}`);
-    
-    let rolle= await new Roll('d0').evaluate({ async: true });
-    
-     
-    while ((currentResult < targetNumber) && (roll.result==dicemax || rolle.result==dicemax)&&i<10){
-        i++;
-              rolle =await  new Roll(`d${dicemax}`).evaluate({ async: true });
-                currentResult =+currentResult + +rolle.result;
-             
-    roll._total=currentResult;
-    
-    roll.terms[0].results[i]=rolle.terms[0].results[0];
-    roll.terms[0].number=i+1;
-             roll._formula=(`${i+1}d${dicemax}+${mod}`);
-      
-    
-    }
-    if(ismagic==1){
-     const mroll=await  new Roll(`d4`).evaluate({ async: true });
-     
-    roll.terms[0].number=i+1;
-    roll.terms[1]=mroll.terms[0];
-             roll._formula=(`${i+1}d${dicemax}+${mod}+1d4`);
-             currentResult =+currentResult + +mroll.result;
-    
-    }
-    
-    roll._total=currentResult;
-    const roll_results=(currentResult>=targetNumber);
-    let result_label="";
-    if(roll_results===false){
-        result_label=game.i18n.localize("KIDSONBROOMS.Fail");
-    }
-    else{
-        result_label=game.i18n.localize("KIDSONBROOMS.Sucess");;
+    context.motivation = {
+      value: this.actor.system.motivation,
+      enriched: await enrich(this.actor.system.motivation),
+      field: this.actor.system.schema.fields.motivation,
     };
-
-    const msg= `${'<strong>' + dataset.label + '</strong>'}<br>` + `${game.i18n.localize("KIDSONBROOMS.Chat_DC")} <strong>${targetNumber}</strong><br>` + `${game.i18n.localize("KIDSONBROOMS.result")} <strong>${result_label}</strong>`;
-  
-    roll.toMessage({
-        flavor: msg,
-        
-        speaker: ChatMessage.getSpeaker(this.actor)
-    
-    });
-    if(Number(formData.zetonyPrzeciwnosci)!=0){
-      const nz = zetony-Number(formData.zetonyPrzeciwnosci);
-      await this.actor.update({"system.adversity":nz}); 
-    }
-    if(roll_results=== false){
-      let zetony = this.actor.system.adversity;
-      const nz = zetony+1;
-      this.actor.update({"system.adversity":nz}); 
-    }
-        }
-        
-       
-      }
-    
+    context.fear = {
+      value: this.actor.system.fear,
+      enriched: await enrich(this.actor.system.fear),
+      field: this.actor.system.schema.fields.fear,
+    };
+    return context
+  }
+}

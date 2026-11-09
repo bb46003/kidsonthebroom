@@ -1,14 +1,14 @@
 // Import document classes.
-import { KidsOnBroomsActor } from "./documents/actor.mjs";
-import { KidsOnBroomsItem } from "./documents/item.mjs";
+import { StudentActor } from "./documents/actor.mjs";
+//import { kotbItem } from "./documents/item.mjs";
 // Import sheet classes.
-import { KidsOnBroomsActorSheet } from "./sheets/actor-sheet.mjs";
-import { KidsOnBroomsItemSheet } from "./sheets/item-sheet.mjs";
+import { StudentSheet } from "./sheets/actor-sheet.mjs";
+//import { kotbItemSheet } from "./sheets/item-sheet.mjs";
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
-import { KIDSONBROOMS } from "./helpers/config.mjs";
+//import { kotb } from "./helpers/config.mjs";
 import { HomeScore } from "./app/home_score.mjs"
-
+import {StudentDataModel} from "./data/actor-data.mjs"
 /* -------------------------------------------- */
 /*  Init Hook                                   */
 /* -------------------------------------------- */
@@ -17,7 +17,7 @@ export default function registerSettings() {
 	//  INTERNAL SETTINGS
 	// -------------------
 	//
-  const SYSTEM_ID = "kidsonthebroom";
+  const SYSTEM_ID = "kotb";
 	game.settings.register(SYSTEM_ID, "points_slytherin", {
 		name: "points_slytherin",
 		scope: "world",
@@ -96,14 +96,13 @@ Hooks.once('init',  function() {
   
   registerSettings();
 
-  game.kidsonbrooms = {
-    KidsOnBroomsActor,
-    KidsOnBroomsItem,
+  game.kotb = {
+    StudentActor,
     HomeScore,
     rollItemMacro
   };
   // Add custom constants for configuration.
-  CONFIG.KIDSONBROOMS = KIDSONBROOMS;
+  //CONFIG.kotb = kotb;
 
   /**
    * Set an initiative formula for the system
@@ -115,18 +114,17 @@ Hooks.once('init',  function() {
   };
   
   // Define custom Document classes
-  CONFIG.Actor.documentClass = KidsOnBroomsActor;
-  CONFIG.Item.documentClass = KidsOnBroomsItem;
+  CONFIG.Actor.documentClass = StudentActor;
 
+  CONFIG.Actor.dataModels = {
+    student: StudentDataModel}
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("kidsonthebroom", KidsOnBroomsActorSheet, { makeDefault: true });
-  Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("kidsonthebroom", KidsOnBroomsItemSheet, { makeDefault: true });
+  Actors.registerSheet("student", StudentSheet, { makeDefault: true });
  
   
   // Preload Handlebars templates.
-  return preloadHandlebarsTemplates();
+  //return preloadHandlebarsTemplates();
 });
 
 /* -------------------------------------------- */
@@ -134,7 +132,7 @@ Hooks.once('init',  function() {
 /* -------------------------------------------- */
 
 // If you need to add Handlebars helpers, here are a few useful examples:
-Handlebars.registerHelper('concat', function() {
+Handlebars.registerHelper('concat', function(...arg) {
   var outStr = '';
   for (var arg in arguments) {
     if (typeof arguments[arg] != 'object') {
@@ -187,22 +185,17 @@ Handlebars.registerHelper("ifCond", function(v1, operator, v2, options) {
 				return options.inverse(this);
 		}
 	});
-Handlebars.registerHelper('concat', function(...args) {
-  // The last argument is always Handlebars options, so ignore it
-  args.pop();
-  return args.join('');
-});
 
 Hooks.once("ready", async function() {
-const SYSTEM_ID = "kidsonthebroom";
+const SYSTEM_ID = "kotb";
 if(game.settings.get(SYSTEM_ID, "hous_score")){
- await game.kidsonbrooms.HomeScore.initialise()
+ await game.kotb.HomeScore.initialise()
 
       const houseSettings = [
-          { name: "gryffindor", value: game.kidsonbrooms.HomeScore._instance.data.points_gryffindor || 0 },
-          { name: "slytherin", value: game.kidsonbrooms.HomeScore._instance.data.points_slytherin ||0 },
-          { name: "hufflepuff", value: game.kidsonbrooms.HomeScore._instance.data.points_hufflepuff || 0 },
-          { name: "ravenclaw", value: game.kidsonbrooms.HomeScore._instance.data.points_ravenclaw || 0 }
+          { name: "gryffindor", value: game.kotb.HomeScore._instance.data.points_gryffindor || 0 },
+          { name: "slytherin", value: game.kotb.HomeScore._instance.data.points_slytherin ||0 },
+          { name: "hufflepuff", value: game.kotb.HomeScore._instance.data.points_hufflepuff || 0 },
+          { name: "ravenclaw", value: game.kotb.HomeScore._instance.data.points_ravenclaw || 0 }
       ];
   
       const houseWithHighestPoints = houseSettings.reduce((maxHouse, currentHouse) => {
@@ -239,7 +232,7 @@ async function createItemMacro(data, slot) {
   const item = data.data;
 
   // Create the macro command
-  const command = `game.kidsonbrooms.rollItemMacro("${item.name}");`;
+  const command = `game.kotb.rollItemMacro("${item.name}");`;
   let macro = game.macros.find(m => (m.name === item.name) && (m.command === command));
   if (!macro) {
     macro = await Macro.create({
@@ -247,7 +240,7 @@ async function createItemMacro(data, slot) {
       type: "script",
       img: item.img,
       command: command,
-      flags: { "kidsonbrooms.itemMacro": true }
+      flags: { "kotb.itemMacro": true }
     });
   }
   game.user.assignHotbarMacro(macro, slot);

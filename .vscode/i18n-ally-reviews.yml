@@ -469,3 +469,27 @@ reviews:
             suggestion: ''
             type: approve
             time: '2025-09-14T12:43:21.278Z'
+  KIDSONBROOMS.ROLL_FOR_STATS:
+    locales:
+      en:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: jvQE_SpTaPxjzCspsa5tN
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-10-03T07:26:50.969Z'
+  KIDSONBROOMS.ROLL_FOR_MAGIC:
+    locales:
+      en:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: boi8-FdyNwjUpiZQWDB91
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-10-03T07:27:08.080Z'

@@ -1,11 +1,11 @@
 {
-  "id": "kidsonthebroom",
-  "title": "Kids On Brooms - moja wersja",
+  "id": "kotb",
+  "title": "Kids On Brooms",
   "description": "The Kids On Brooms system for FoundryVTT!",
   "version": "1.0.2",
   "compatibility": {
-      "minimum": "12",
-      "verified": "13.348"
+      "minimum": "14",
+      "verified": "14.368"
     },
   "authors": [
         {
@@ -27,6 +27,11 @@
           "path": "lang/en.json"
         }
       ],
+   "documentTypes": {
+    "Actor": {
+      "student":{}
+    }
+  },
   "socket": true,
   "url": "https://github.com/bb46003/kidsonthebroom/tree/main",
   "manifest": "https://raw.githubusercontent.com/bb46003/kidsonthebroom/refs/heads/main/system.json",

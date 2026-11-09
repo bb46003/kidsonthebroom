@@ -1,0 +1,220 @@
+
+<section>
+
+    <header class="student-header">
+        <h1>{{localize "kotb.student"}}</h1>
+
+        {{formInput fields.name value=actor.name}}
+    </header>
+
+    <main class="student-layout">
+
+        <!-- LEFT COLUMN -->
+        <section class="student-main">
+
+            <section class="sheet-panel identity-panel">
+                <h2>{{localize "kotb.studentInformation"}}</h2>
+
+                <div class="field-row">
+                    <div>
+                        <label>{{localize "kotb.age"}}</label>
+                        {{formInput systemFields.age value=system.age}}
+                    </div>
+
+                    <div>
+                        <label>{{localize "kotb.pronouns"}}</label>
+                        {{formInput systemFields.pronouns value=system.pronouns}}
+                    </div>
+
+                    <div>
+                        <label>{{localize "kotb.grade"}}</label>
+                        {{formInput systemFields.grade value=system.grade }}
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label>{{localize systemFields.fear.label}}</label>
+                      {{formInput
+    fear.field
+    value=fear.value
+    enriched=fear.enriched
+    toggled="true"
+  }}
+                </div>
+
+                <div class="field-group">
+                    <label>{{localize systemFields.motivation.label}}</label>
+                    {{formInput    motivation.field
+    value=motivation.value
+    enriched=motivation.enriched
+    toggled="true"
+  }}
+                </div>
+
+                <div class="field-group">
+                    <label>{{localize systemFields.description.label}}</label>
+                    {{formInput    description.field
+    value=description.value
+    enriched=description.enriched
+    toggled="true"
+  }}                </div>
+            </section>
+
+            <!-- EQUIPMENT -->
+            <section class="sheet-panel equipment-panel">
+                <h2>{{localize "kotb.equipment"}}</h2>
+
+                <div class="equipment-section">
+                    <h3>{{localize "kotb.broom"}}</h3>
+
+                    {{#each itemsByType.broom}}
+                        <div class="item-entry" data-item-id="{{this.id}}">
+                            <img src="{{this.img}}" alt="{{this.name}}">
+                            <span>{{this.name}}</span>
+                        </div>
+                    {{else}}
+                        <p>{{localize "kotb.noBroom"}}</p>
+                    {{/each}}
+                </div>
+
+                <div class="equipment-section">
+                    <h3>{{localize "kotb.wand"}}</h3>
+
+                    {{#each itemsByType.wand}}
+                        <div class="item-entry" data-item-id="{{this.id}}">
+                            <img src="{{this.img}}" alt="{{this.name}}">
+                            <span>{{this.name}}</span>
+                        </div>
+                    {{else}}
+                        <p>{{localize "kotb.noWand"}}</p>
+                    {{/each}}
+                </div>
+
+                <div class="equipment-section">
+                    <h3>{{localize systemFields.animalfamiliar.label}}</h3>
+
+                    <div class="familiar-entry">
+                        <img src="{{system.animalfamiliar.img}}" alt="">
+                        <div class="flexcol">
+                            <label>{{localize systemFields.animalfamiliar.fields.name.label}}</label>
+                            <span>{{formInput systemFields.animalfamiliar.fields.name value=system.animalfamiliar.name}}</span>
+                        </div>
+                        <div class="flexcol">
+                            <label>{{localize systemFields.spiecies.fields.spiecies.label}}</label>
+                            <span>{{formInput systemFields.animalfamiliar.fields.spiecies value=system.animalfamiliar.spiecies}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="equipment-section">
+                    <h3>{{localize systemFields.equipment.label}}</h3>
+                    {{formInput    equipment.field
+    value=equipment.value
+    enriched=equipment.enriched
+    toggled="true"
+  }}                </div>
+            </section>
+
+            <!-- STRENGTHS -->
+            <section class="sheet-panel strengths-panel">
+                <h2>{{localize "kotb.strengths"}}</h2>
+
+                {{#each itemsByType.strength}}
+                    <div class="strength-entry" data-item-id="{{this.id}}">
+                        <img src="{{this.img}}" alt="{{this.name}}">
+                        <span>{{this.name}}</span>
+                    </div>
+                {{else}}
+                    <p>{{localize "kotb.noStrengths"}}</p>
+                {{/each}}
+            </section>
+
+        </section>
+
+        <!-- RIGHT COLUMN -->
+        <aside class="student-sidebar">
+
+            <!-- ATTRIBUTES -->
+            <section class="sheet-panel attributes-panel">
+                <h2>{{localize "kotb.attributes.label"}}</h2>
+
+                <div class="attributes-grid">
+
+                    {{#each @root.systemFields.attributes as |attribute key|}}
+                        <div class="attribute-card">
+                            <h3>{{localize attribute.label}}</h3>
+
+                            <div class="attribute-dice">
+                                <label>{{localize attribute.field.dice.label}}</label>
+                                {{formInput attribute.fields.dice value=(concat system.attribute (concat attribute.name ".dice"))}}
+                            </div>
+
+                            <div class="attribute-values">
+
+                                <div class="attribute-value">
+                                <label>{{localize attribute.fields.stat.label}}</label>
+                                {{formInput attribute.fields.stat.fields.value value=(concat system.attribute (concat attribute.name ".stat.value"))}}
+                                <label>{{localize attribute.fields.stat.fields.total.label}}</label>
+<strong>
+  {{lookup (lookup (lookup @root.system.attributes attribute.name) "stat") "total"}}
+</strong>                                </div>
+
+                               <div class="attribute-value">
+                                <label>{{localize attribute.fields.magic.label}}</label>
+                                {{formInput attribute.fields.magic.fields.value value=(concat system.attribute (concat attribute.name ".magic.value"))}}
+                                <label>{{localize attribute.fields.magic.fields.total.label}}</label>
+<strong>
+  {{lookup (lookup (lookup @root.system.attributes attribute.name) "magic") "total"}}
+</strong>                                </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    {{/each}}
+
+                </div>
+            </section>
+
+            <!-- ADVERSITY -->
+            <section class="sheet-panel adversity-panel">
+                <h2>{{localize systemFields.asversityTokens.label}}</h2>
+
+                {{formInput
+                    systemFields.asversityTokens
+                    value=system.asversityTokens
+                }}
+            </section>
+
+            <!-- TROPE QUESTIONS -->
+            <section class="sheet-panel trope-panel">
+                <h2>{{localize systemFields.tropequestions.label}}</h2>
+                    {{formInput    tropequestions.field
+    value=tropequestions.value
+    enriched=tropequestions.enriched
+    toggled="true"
+  }}s
+            </section>
+
+            <!-- STRENGTHS / QUESTIONS -->
+            <section class="sheet-panel">
+                <h2>{{localize systemFields.strengths.label}}</h2>
+                    {{formInput   strengths.field
+    value=strengths.value
+    enriched=strengths.enriched
+    toggled="true"
+  }}
+            </section>
+
+            <!-- NOTES -->
+            <section class="sheet-panel notes-panel">
+                <h2>{{localize systemFields.notes.label}}</h2>
+
+                    {{ formInput   notes.field
+    value=notes.value
+    enriched=notes.enriched
+    toggled="true"
+  }}            </section>
+
+        </aside>
+    </main>
+</section>
