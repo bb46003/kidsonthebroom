@@ -1,0 +1,24 @@
+            <!-- NOTES -->
+            <section class="sheet-panel notes-panel">
+                <h2>{{localize systemFields.notes.label}}</h2>
+
+                    {{ formInput   notes.field
+    value=notes.value
+    enriched=notes.enriched
+    toggled="true"
+  }}            </section>
+                <div class="equipment-section">
+                    <h3>{{localize systemFields.equipment.label}}</h3>
+                    {{formInput    equipment.field
+    value=equipment.value
+    enriched=equipment.enriched
+    toggled="true"
+  }}                </div>
+
+                  <div class="field-group">
+                    <label>{{localize systemFields.description.label}}</label>
+                    {{formInput    description.field
+    value=description.value
+    enriched=description.enriched
+    toggled="true"
+  }}                </div>

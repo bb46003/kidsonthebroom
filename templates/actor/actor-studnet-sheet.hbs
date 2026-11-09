@@ -51,19 +51,11 @@
   }}
                 </div>
 
-                <div class="field-group">
-                    <label>{{localize systemFields.description.label}}</label>
-                    {{formInput    description.field
-    value=description.value
-    enriched=description.enriched
-    toggled="true"
-  }}                </div>
+
             </section>
 
             <!-- EQUIPMENT -->
             <section class="sheet-panel equipment-panel">
-                <h2>{{localize "kotb.equipment"}}</h2>
-
                 <div class="equipment-section">
                     <h3>{{localize "kotb.broom"}}</h3>
 
@@ -106,13 +98,7 @@
                     </div>
                 </div>
 
-                <div class="equipment-section">
-                    <h3>{{localize systemFields.equipment.label}}</h3>
-                    {{formInput    equipment.field
-    value=equipment.value
-    enriched=equipment.enriched
-    toggled="true"
-  }}                </div>
+
             </section>
 
             <!-- STRENGTHS -->
@@ -142,31 +128,33 @@
 
                     {{#each @root.systemFields.attributes as |attribute key|}}
                         <div class="attribute-card">
-                            <h3>{{localize attribute.label}}</h3>
+                            <label>{{localize attribute.label}}</label>
 
                             <div class="attribute-dice">
-                                <label>{{localize attribute.field.dice.label}}</label>
-                                {{formInput attribute.fields.dice value=(concat system.attribute (concat attribute.name ".dice"))}}
+                                <label>{{localize attribute.fields.dice.label}}</label>
+                                {{formInput attribute.fields.dice value=(lookup (lookup @root.system.attributes attribute.name) "dice")}}
                             </div>
-
+                           {{log (lookup (lookup @root.system.attributes attribute.name) "dice")}}
                             <div class="attribute-values">
 
                                 <div class="attribute-value">
-                                <label>{{localize attribute.fields.stat.label}}</label>
-                                {{formInput attribute.fields.stat.fields.value value=(concat system.attribute (concat attribute.name ".stat.value"))}}
-                                <label>{{localize attribute.fields.stat.fields.total.label}}</label>
-<strong>
+                                <a><label>{{localize attribute.fields.stat.label}}</label></a>
+                                <strong>    
   {{lookup (lookup (lookup @root.system.attributes attribute.name) "stat") "total"}}
-</strong>                                </div>
+</strong> 
+                                <label>{{localize attribute.fields.stat.fields.total.label}}</label>
+ 
+{{formInput attribute.fields.stat.fields.value value=(lookup (lookup (lookup @root.system.attributes attribute.name) "stat") "value")}}                        </div>
 
                                <div class="attribute-value">
-                                <label>{{localize attribute.fields.magic.label}}</label>
-                                {{formInput attribute.fields.magic.fields.value value=(concat system.attribute (concat attribute.name ".magic.value"))}}
-                                <label>{{localize attribute.fields.magic.fields.total.label}}</label>
-<strong>
+                                <a><label>{{localize attribute.fields.magic.label}}</label></a>
+                                <strong>
   {{lookup (lookup (lookup @root.system.attributes attribute.name) "magic") "total"}}
-</strong>                                </div>
+</strong>   
+                                <label>{{localize attribute.fields.magic.fields.total.label}}</label>
+                             {{formInput attribute.fields.magic.fields.value value=(lookup (lookup (lookup @root.system.attributes  attribute.name) "magic") "value")}}
                                 </div>
+                               
 
                             </div>
                         </div>
@@ -178,11 +166,14 @@
             <!-- ADVERSITY -->
             <section class="sheet-panel adversity-panel">
                 <h2>{{localize systemFields.asversityTokens.label}}</h2>
-
+                <div class="flexrow">
+                    <label>{{localize "kotb.asversityTokens.description"}}</label>
                 {{formInput
                     systemFields.asversityTokens
                     value=system.asversityTokens
                 }}
+                </div>
+
             </section>
 
             <!-- TROPE QUESTIONS -->
@@ -205,15 +196,6 @@
   }}
             </section>
 
-            <!-- NOTES -->
-            <section class="sheet-panel notes-panel">
-                <h2>{{localize systemFields.notes.label}}</h2>
-
-                    {{ formInput   notes.field
-    value=notes.value
-    enriched=notes.enriched
-    toggled="true"
-  }}            </section>
 
         </aside>
     </main>
