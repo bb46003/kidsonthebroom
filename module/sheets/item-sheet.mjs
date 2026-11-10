@@ -3,20 +3,24 @@
  * @extends {ItemSheet}
  */
 export class KidsOnBroomsItemSheet extends ItemSheet {
-
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["kidsonbrooms", "sheet", "item"],
       width: 520,
       height: 480,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
+      tabs: [
+        {
+          navSelector: ".sheet-tabs",
+          contentSelector: ".sheet-body",
+          initial: "description",
+        },
+      ],
     });
   }
 
   /** @override */
   get template() {
-    
     const path = "systems/kidsonthebroom/templates/item";
     // Return a single sheet for all item types.
     // return `${path}/item-sheet.html`;
@@ -24,16 +28,15 @@ export class KidsOnBroomsItemSheet extends ItemSheet {
     // Alternatively, you could use the following return statement to do a
     // unique item sheet by type, like `weapon-sheet.html`.
     return `${path}/item-${this.item.type}-sheet.html`;
- 
-}
+  }
 
   /* -------------------------------------------- */
 
   /** @override */
- async getData(options) {
+  async getData(options) {
     // Retrieve base data structure.
     const context = await super.getData();
-    
+
     // Use a safe clone of the item data for further operations.
     const itemData = this.item.toObject(false);
 
@@ -48,10 +51,13 @@ export class KidsOnBroomsItemSheet extends ItemSheet {
     context.system = itemData.system;
     context.flags = itemData.flags;
 
-    context.description = await TextEditor.enrichHTML(this.item.system.description, {
-      secrets: context.editable,
-      async: true,
-    });
+    context.description = await TextEditor.enrichHTML(
+      this.item.system.description,
+      {
+        secrets: context.editable,
+        async: true,
+      },
+    );
     console.log(context.description);
 
     return context;
@@ -61,7 +67,6 @@ export class KidsOnBroomsItemSheet extends ItemSheet {
 
   /** @override */
   activateListeners(html) {
-   
     // Everything below here is only needed if the sheet is editable
     if (!this.isEditable) return;
 

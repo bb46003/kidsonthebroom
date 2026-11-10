@@ -11,4 +11,5 @@ export class StudentActor extends foundry.documents.Actor {
         "prototypeToken.disposition": 1, // Friendly
       });
     }
-  }}
+  }
+}

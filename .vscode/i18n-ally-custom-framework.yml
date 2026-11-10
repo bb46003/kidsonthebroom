@@ -30,9 +30,5 @@ usageMatchRegex:
   - "[^\\w\\d]game\\.i18n\\.format\\(['\"`]({key})['\"`]\\)"
   - "\\{\\{#if\\s+\\(eq\\s+[^\\s]+\\s+lowercase\\(localize\\(['\"`]({key})['\"`]\\)\\)\\}\\}"
 
-
-
-
-
 # If set to true, only enables this custom framework (will disable all built-in frameworks)
 monopoly: true
