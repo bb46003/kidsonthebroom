@@ -1,14 +1,10 @@
-// Import document classes.
 import { StudentActor } from "./documents/actor.mjs";
-//import { kotbItem } from "./documents/item.mjs";
-// Import sheet classes.
 import { StudentSheet } from "./sheets/actor-sheet.mjs";
-//import { kotbItemSheet } from "./sheets/item-sheet.mjs";
-// Import helper/utility classes and constants.
-import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
-//import { kotb } from "./helpers/config.mjs";
 import { HomeScore } from "./app/home_score.mjs";
 import { StudentDataModel } from "./data/actor-data.mjs";
+import { StrengthsDataModel } from "./data/item-strengths.mjs";
+import { StrengthsItemSheet } from "./sheets/item-sheet.mjs";
+import * as utils from "./utils.mjs";
 /* -------------------------------------------- */
 /*  Init Hook                                   */
 /* -------------------------------------------- */
@@ -109,18 +105,27 @@ Hooks.once("init", function () {
     decimals: 2,
   };
 
-  // Define custom Document classes
   CONFIG.Actor.documentClass = StudentActor;
 
   CONFIG.Actor.dataModels = {
     student: StudentDataModel,
   };
-  // Register sheet application classes
-  Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("student", StudentSheet, { makeDefault: true });
+  CONFIG.Item.dataModels = {
+    strengths: StrengthsDataModel
+  }
 
-  // Preload Handlebars templates.
-  //return preloadHandlebarsTemplates();
+  foundry.applications.apps.DocumentSheetConfig.unregisterSheet(
+    foundry.documents.Actor,
+    "core",
+    foundry.applications.sheets.ActorSheet,
+  );
+  foundry.applications.apps.DocumentSheetConfig.unregisterSheet(
+    foundry.documents.Item,
+    "core",
+    foundry.applications.sheets.ItemSheetV2,
+  );
+    utils.registerSystemSheet(foundry.documents.Actor, StudentSheet, "student");
+  utils.registerSystemSheet(foundry.documents.Item, StrengthsItemSheet, "strengths");
 });
 
 /* -------------------------------------------- */

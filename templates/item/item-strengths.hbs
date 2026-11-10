@@ -1,0 +1,78 @@
+
+<div class="strength-sheet">
+      <header class="talent-header flexrow">
+      <div class="image-container">
+        <img
+          class="profile-img"
+          src="{{item.img}}"
+          data-edit="img"
+          data-action="editImage"
+          data-edit="img"
+        />
+      </div>
+      <h3>Nazwa Broni
+        <input
+          name="name"
+          type="text"
+          value="{{item.name}}"
+          placeholder="Name"
+        />
+      </h3>
+
+    </header>
+  <div class="form-group">
+    <label>{{system.schema.fields.effectType.label}}</label>
+    {{formInput system.schema.fields.effectType value=system.effectType}}
+  </div>
+
+  <div class="form-group">
+    <label>{{system.schema.fields.cost.label}}</label>
+    {{formInput system.schema.fields.cost value=system.cost}}
+  </div>
+
+  <div class="form-group">
+    <label>{{system.schema.fields.value.label}}</label>
+    {{formInput system.schema.fields.value value=system.value}}
+  </div>
+
+  <div class="form-group">
+    <label>{{system.schema.fields.skill.label}}</label>
+    {{formInput system.schema.fields.skill value=system.skill}}
+  </div>
+
+  <div class="form-group">
+    <label>{{system.schema.fields.magicType.label}}</label>
+    {{formInput system.schema.fields.magicType value=system.magicType}}
+  </div>
+
+  <div class="form-group">
+    <label>{{system.schema.fields.usageLimit.label}}</label>
+    {{formInput system.schema.fields.usageLimit value=system.usageLimit}}
+  </div>
+
+  <div class="form-group">
+    <label>{{system.schema.fields.specialEffect.label}}</label>
+    {{formInput system.schema.fields.specialEffect value=system.specialEffect}}
+  </div>
+
+  <div class="field-group">
+  <label>{{localize systemFields.description.label}}</label>
+  {{formInput
+    description.field
+    value=description.value
+    enriched=description.enriched
+    toggled="true"
+  }}
+</div>
+{{#if system.specialEffect}}
+  <div class="field-group">
+  <label>{{localize systemFields.specialEffectDescription.label}}</label>
+  {{formInput
+    specialEffectDescription.field
+    value=specialEffectDescription.value
+    enriched=specialEffectDescription.enriched
+    toggled="true"
+  }}
+  {{/if}}
+</div>
+</div>

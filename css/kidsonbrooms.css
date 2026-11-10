@@ -230,3 +230,27 @@ border: 1px solid;
   }
 
 }
+.kotb-item{
+  .talent-header{
+    max-height: 9em;
+    .profile-img{
+      max-width: 9em;
+    }
+  }
+    prose-mirror {
+    max-height: 150px;
+    border: 1px solid;
+    border-radius: 10px;
+    margin-bottom: 5px;
+  }
+  .form-group{
+display: grid;
+        align-items: center;
+        grid-template-columns: 2fr 1fr;
+        gap: 10px;
+        margin-bottom: 5px;
+        input, select{
+          text-align: center;
+        }
+  }
+}

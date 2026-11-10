@@ -30,6 +30,9 @@
   "documentTypes": {
     "Actor": {
       "student": {}
+    },
+    "Item":{
+      "strengths":{}
     }
   },
   "socket": true,
