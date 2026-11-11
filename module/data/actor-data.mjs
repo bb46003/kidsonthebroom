@@ -479,18 +479,13 @@ export class StudentDataModel extends foundry.abstract.TypeDataModel {
             label: "kotb.animalfamiliar.name",
           }),
           img: new StringField({
-            initial: "",
+            initial: "icons/svg/mystery-man.svg",
             label: "kotb.animalfamiliar.img",
           }),
         },
         { label: "kotb.animalfamiliar.label" },
       ),
       tropequestions: new HTMLField({
-        label: "kotb.tropequestions",
-        initial: "",
-        requiredd: true,
-      }),
-      strengths: new HTMLField({
         label: "kotb.tropequestions",
         initial: "",
         requiredd: true,

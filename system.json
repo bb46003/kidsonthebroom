@@ -32,7 +32,8 @@
       "student": {}
     },
     "Item":{
-      "strengths":{}
+      "strengths":{},
+      "wand":{}
     }
   },
   "socket": true,

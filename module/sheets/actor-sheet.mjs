@@ -18,6 +18,7 @@ export class StudentSheet extends api.HandlebarsApplicationMixin(
     },
     actions: {
       toggle: StudentSheet.#toggle,
+      itemContextMenu: StudentSheet.#itemContextMenu
     },
   };
   static PARTS = {
@@ -105,9 +106,13 @@ export class StudentSheet extends api.HandlebarsApplicationMixin(
       enriched: await enrich(this.actor.system.fear),
       field: this.actor.system.schema.fields.fear,
     };
+    const items = {
+      strengths: await this.prepareStrengths()
+    }
     Object.assign(context, {
       tokenDisplay: this.tokenDisplay,
       tokenImg: this.actor.prototypeToken.texture.src,
+      items: items
     });
 
     return context;
@@ -117,11 +122,72 @@ export class StudentSheet extends api.HandlebarsApplicationMixin(
     this.tokenDisplay = target.checked;
     this.render(true);
   }
-  async _onRender(document, options) {
-    await super._onRender(document, options);
-     const tabElement = this.element.querySelector(`.tabs [data-group="items"][data-tab="equipment"]`)
-     console.log(this.element);
-console.log(this.element.querySelectorAll(".tabs"));
-console.log(this.element.querySelectorAll('[data-group="items"][data-tab="equipment"]'));
-    }
+   static async #itemContextMenu(ev) {
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    const button = ev.target.closest("a");
+    const itemId = button.dataset.item;
+    const item = this.actor.items.get(itemId);
+    // Remove old menu if exists
+    document.querySelector(".custom-context-menu")?.remove();
+
+    // Create element instead of raw string (safer and cleaner)
+    const menu = document.createElement("div");
+    menu.classList.add("custom-context-menu");
+    const openItem = game.i18n.format("kotb.openItem", {itemType: item.type})
+    const deleteItem = game.i18n.format("kotb.deleteItem", {itemType: item.type})
+ 
+    menu.innerHTML = `
+    <div class="menu-option" data-action="open">${openItem}</div>
+    <div class="menu-option" data-action="delete">${deleteItem}</div>
+  `;
+    
+
+    // Position at mouse location
+    menu.style.position = "absolute";
+    menu.style.left = `${ev.pageX}px`;
+    menu.style.top = `${ev.pageY}px`;
+    menu.style.zIndex = 1000;
+
+    document.body.appendChild(menu);
+
+    // Attach click handler
+    menu.addEventListener("click", async (e) => {
+      const action = e.target.dataset.action;
+      if (!action) return;
+
+      if (action === "open") {
+        const item = this.actor.items.get(itemId);
+        item?.sheet.render(true);
+      }
+
+      if (action === "delete") {
+        const item = this.actor.items.get(itemId);
+        await item?.delete();
+      }
+
+      menu.remove();
+    });
+
+    // Close when clicking elsewhere
+    setTimeout(() => {
+      document.addEventListener("click", () => menu.remove(), { once: true });
+    }, 10);
+  }
+  async prepareStrengths(){
+        const strengths = this.actor.items.filter((item) => item.type === "strengths");
+    const data = {};
+    strengths.forEach((strength) => {
+      const itemID = strength.id;
+      const iamge = strength.img;
+      const itemName = strength.name;
+      data[itemID] = {
+        img: iamge,
+        name: itemName,
+      };
+    });
+
+    return data;
+  }
 }

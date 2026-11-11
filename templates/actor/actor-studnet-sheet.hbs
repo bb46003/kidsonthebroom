@@ -68,7 +68,17 @@
         <div class="equipment-section">
           <h3>{{localize systemFields.animalfamiliar.label}}</h3>
           <div class="familiar-entry">
-            <img src="{{system.animalfamiliar.img}}" alt="" />
+            <div class="flexcol">
+                            <label>{{localize
+                  systemFields.animalfamiliar.fields.img.label
+                }}</label>
+                                <img
+      class="item-img"
+      src="{{system.animalfamiliar.img}}"
+      data-action="editImage"
+      data-edit="system.animalfamiliar.img"
+    />
+            </div>
             <div class="flexcol">
               <label>{{localize
                   systemFields.animalfamiliar.fields.name.label
@@ -80,7 +90,7 @@
             </div>
             <div class="flexcol">
               <label>{{localize
-                  systemFields.spiecies.fields.spiecies.label
+                  systemFields.animalfamiliar.fields.spiecies.label
                 }}</label>
               <span>{{formInput
                   systemFields.animalfamiliar.fields.spiecies
@@ -92,11 +102,14 @@
       </section>
       <section class="sheet-panel strengths-panel">
         <h2>{{localize "kotb.strengths"}}</h2>
-        {{#each itemsByType.strength}}
-          <div class="strength-entry" data-item-id="{{this.id}}">
-            <img src="{{this.img}}" alt="{{this.name}}" />
-            <span>{{this.name}}</span>
-          </div>
+        {{#each items.strengths as |strength key|}}
+        <div class="flexrow actor-item">
+          <img class="item-img" src="{{strength.img}}">
+          <a class="use-item" data-action="useItem" data-id="{{key}}" title="{{localize "kotb.useItem"}}">{{strength.name}}</a>
+          <a class="threeDots" data-action="itemContextMenu" data-item="{{key}}">
+             <i class="fas fa-ellipsis-v"></i>
+          </a>
+        </div>
         {{else}}
           <p>{{localize "kotb.noStrengths"}}</p>
         {{/each}}
@@ -186,15 +199,6 @@
           tropequestions.field
           value=tropequestions.value
           enriched=tropequestions.enriched
-          toggled="true"
-        }}
-      </section>
-      <section class="sheet-panel">
-        <h2>{{localize systemFields.strengths.label}}</h2>
-        {{formInput
-          strengths.field
-          value=strengths.value
-          enriched=strengths.enriched
           toggled="true"
         }}
       </section>

@@ -30,7 +30,7 @@ export class StrengthsDataModel extends foundry.abstract.TypeDataModel {
       }),
 
       skill: new StringField({
-        initial: "",
+        initial: "brains",
         choices:{
            brains:"kotb.attributes.brains",
            brawn: "kotb.attributes.brawn",

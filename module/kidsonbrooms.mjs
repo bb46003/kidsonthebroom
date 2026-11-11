@@ -5,6 +5,7 @@ import { StudentDataModel } from "./data/actor-data.mjs";
 import { StrengthsDataModel } from "./data/item-strengths.mjs";
 import { StrengthsItemSheet } from "./sheets/item-sheet.mjs";
 import * as utils from "./utils.mjs";
+import { wandDataModel } from "./data/item-wand.mjs";
 /* -------------------------------------------- */
 /*  Init Hook                                   */
 /* -------------------------------------------- */
@@ -111,7 +112,8 @@ Hooks.once("init", function () {
     student: StudentDataModel,
   };
   CONFIG.Item.dataModels = {
-    strengths: StrengthsDataModel
+    strengths: StrengthsDataModel,
+    wand: wandDataModel
   }
 
   foundry.applications.apps.DocumentSheetConfig.unregisterSheet(

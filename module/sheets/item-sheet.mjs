@@ -9,7 +9,7 @@ export class StrengthsItemSheet extends api.HandlebarsApplicationMixin(
   }
   static DEFAULT_OPTIONS = {
     classes: ["kotb-item"],
-    position: { width: 500, height: 610 },
+    position: { width: 500, height: 625 },
     actions: {
     },
     form: {

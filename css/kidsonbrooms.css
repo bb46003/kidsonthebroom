@@ -228,9 +228,55 @@ border: 1px solid;
             align-items: center;
     }
   }
+    .item-img{
+            max-width: 1.5em;
+            border: 1px double;
+            border-radius: 5px;
+  }
+  .actor-item{
+    border: 1px solid;
+    border-radius: 0.3em;
+    padding: 0.3em;
+    margin-bottom: 0.3em;
 
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 2em;
+    .threeDots{
+      justify-self: end;
+    }
+}
+.familiar-entry {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 8px;
+
+  .flexcol:first-child {
+    grid-row: span 2;
+  }
+
+  .flexcol {
+               display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+  }
+
+  .item-img {
+    min-width: 100%;
+  }
+}
+.equipment-section{
+    margin-bottom: 10px;
+}
 }
 .kotb-item{
+  .strength-sheet{
+    overflow: auto;
+  }
+
   .talent-header{
     max-height: 9em;
     .profile-img{
@@ -253,4 +299,8 @@ display: grid;
           text-align: center;
         }
   }
+}
+.menu-option{
+  background: #ffffffe7;
+  color: black;
 }
