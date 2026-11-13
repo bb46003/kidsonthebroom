@@ -50,6 +50,10 @@ export class wandDataModel extends foundry.abstract.TypeDataModel {
         initial: "",
         requiredd: true,
       }),
+      isHeld: new BooleanField({
+        initial:false,
+        label: "kotb.heldWand"
+      })
     };
     
   }

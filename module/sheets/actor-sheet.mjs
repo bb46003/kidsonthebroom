@@ -107,7 +107,8 @@ export class StudentSheet extends api.HandlebarsApplicationMixin(
       field: this.actor.system.schema.fields.fear,
     };
     const items = {
-      strengths: await this.prepareStrengths()
+      strengths: await this.prepareStrengths(),
+      wands: await this.prepareWand(),
     }
     Object.assign(context, {
       tokenDisplay: this.tokenDisplay,
@@ -190,4 +191,40 @@ export class StudentSheet extends api.HandlebarsApplicationMixin(
 
     return data;
   }
+async prepareWand() {
+  const wands = this.actor.items
+    .filter((item) => item.type === "wand")
+    .map((wand) => ({
+      id: wand.id,
+      img: wand.img,
+      name: wand.name,
+      isHeld: wand.system.isHeld,
+      core: wand.system.core,
+      wood: wand.system.wood,
+    }));
+
+  return {
+    wands,
+    selectedWand: wands.find((wand) => wand.isHeld) ?? null,
+  };
+}
+_processFormData(event, form, formData) {
+  const target = event.target;
+  const name = target.name;
+
+  if (name === "system.wand") {
+    const selectedWandId = target.value;
+
+    const wands = this.actor.items.filter((item) => item.type === "wand")
+    wands.forEach((wand) =>{
+      if(wand.id === selectedWandId){
+        wand.update({["system.isHeld"]:true})
+      }else{
+         wand.update({["system.isHeld"]:false})
+      }
+    })
+  }
+   delete formData.object["system.wand"]
+  return super._processFormData(event, form, formData);
+}
 }

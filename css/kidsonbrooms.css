@@ -248,7 +248,7 @@ border: 1px solid;
       justify-self: end;
     }
 }
-.familiar-entry {
+.familiar-entry, .wand-details {
   display: grid;
   grid-template-columns: 100px 1fr;
   grid-template-rows: 1fr 1fr;

@@ -56,14 +56,43 @@
         </div>
         <div class="equipment-section">
           <h3>{{localize "kotb.wand"}}</h3>
-          {{#each itemsByType.wand}}
-            <div class="item-entry" data-item-id="{{this.id}}">
-              <img src="{{this.img}}" alt="{{this.name}}" />
-              <span>{{this.name}}</span>
-            </div>
-          {{else}}
-            <p>{{localize "kotb.noWand"}}</p>
-          {{/each}}
+<div class="wand-selection">
+  <div class="form-group">
+    <label>{{localize "kotb.wand.select"}}</label>
+
+    <select name="system.wand">
+      <option value="">{{localize "kotb.wand.noSelection"}}</option>
+
+      {{#each items.wands.wands as |wand|}}
+      {{log wand}}
+        <option value="{{wand.id}}" {{#if wand.isHeld}}selected{{/if}}>
+          {{wand.name}}
+        </option>
+      {{/each}}
+    </select>
+  </div>
+
+  {{#if items.wands.selectedWand}}
+
+    <div class="wand-details">
+      <div class="flexcol">
+        <img src="{{items.wands.selectedWand.img}}" alt="{{items.wands.selectedWand.name}}">
+      </div>
+      
+      <div class="flexcol">
+        <label>{{localize "kotb.wand.core"}}</label>
+        <span>{{items.wands.selectedWand.core.name}}</span>
+        <span>{{localize (concat "kotb.attributes." items.wands.selectedWand.core.skill)}}</span>
+      </div>
+
+      <div class="flexcol">
+        <label>{{localize "kotb.wand.wood"}}</label>
+        <span>{{items.wands.selectedWand.wood.name}}</span>
+        <span>{{localize (concat "kotb.attributes." items.wands.selectedWand.wood.skill)}}</span>
+      </div>
+    </div>
+  {{/if}}
+</div>
         </div>
         <div class="equipment-section">
           <h3>{{localize systemFields.animalfamiliar.label}}</h3>
