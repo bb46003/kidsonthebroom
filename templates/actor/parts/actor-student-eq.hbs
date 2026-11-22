@@ -2,6 +2,7 @@
   data-tab="equipment"
   action-data="tab"
   data-group="items">
+  <div class="left">
   <div>
     <h3>{{localize "kotb.wands"}}</h3>
     <div>
@@ -9,8 +10,8 @@
     <div class="wand-details-eq">
       
       <div class="flexcol">
-        <img src="{{wand.img}}">
         <label>{{wand.name}}</label>
+        <img src="{{wand.img}}">
       </div>
       
       <div class="flexcol">
@@ -31,25 +32,79 @@
     {{/each}}
     </div>
   </div>
-    <div>
+  <div>
     <h3>{{localize "kotb.brooms"}}</h3>
     <div>
-    {{#each items.brooms as |broom|}}
-    <div class="wand-details-eq">
-      
-      <div class="flexcol">
-        <img src="{{broom.img}}">
-        <label>{{broom.name}}</label>
-      </div>      
-      <div class="flexcol">
-        <label>{{localize "kotb.riderDescription"}}</label>
-        <span>{{broom.riderDescription}}</span>
-      </div>
-      <a class="threeDots" data-action="itemContextMenu" data-item="{{wand.id}}">
-        <i class="fas fa-ellipsis-v"></i>
-      </a>
+    {{#each items.brooms.brooms as |broom|}}
+      <div class="wand-details-eq">
+
+        <div class="flexcol">
+          <label>{{broom.name}}</label>
+          <img src="{{broom.img}}">
+        </div>
+
+    <div class="flexcol">
+      <label>{{localize "kotb.riderDescription"}}</label>
+      <span>{{broom.riderDescription}}</span>
     </div>
+
+    {{#with broom.bonus as |bonus|}}
+      {{#if bonus}}
+        <div class="flexcol broom-bonus">
+          {{#if (eq bonus.type "strength")}}
+            <label>{{localize "kotb.gainStrength"}}</label>
+            <a data-action="openStrength" data-id="{{bonus.uuid}}">{{bonus.name}}</a>
+          {{/if}}
+
+          {{#if (eq bonus.type "skill")}}
+            <label>{{localize "kotb.gainSkillBonus"}}</label>
+            <span>
+              {{localize (concat "kotb.attributes." bonus.skill)}}
+              +{{bonus.value}}
+            </span>
+          {{/if}}
+
+          {{#if (eq bonus.type "other")}}
+            <label>{{localize "kotb.gainotherBonus"}}</label>
+            <span>{{{bonus.description}}}</span>
+          {{/if}}
+        </div>
+      {{/if}}
+    {{/with}}
+    
+    <a class="threeDots" data-action="itemContextMenu" data-item="{{broom.id}}">
+      <i class="fas fa-ellipsis-v"></i>
+    </a>
+
+     </div>
     {{/each}}
     </div>
   </div>
-</section>
+  <div>
+    <h4>{{localize "kotb.othersItems"}}</h4>
+    {{#each items.others as |other|}}
+    <div class="other-details-eq">
+      <div class="flexcol">
+        <label>{{other.name}}</label>
+        <img src="{{other.img}}">
+      </div>
+      <div class="description">
+        {{{other.description}}}
+      </div>
+      <a class="threeDots" data-action="itemContextMenu" data-item="{{other.id}}">
+      <i class="fas fa-ellipsis-v"></i>
+    </a>
+    </div>
+    {{/each}}
+  </div>
+  </div>
+  <div class="right">
+    <h4>{{localize "kotb.eqText"}}</h4>
+        {{formInput
+          equipment.field
+          value=equipment.value
+          enriched=equipment.enriched
+          toggled="true"
+        }}
+  </div>
+</section>  

@@ -1,4 +1,4 @@
-<section class="main tab equipment {{tabs.main.cssClass}}"
+<section class="main tab main {{tabs.main.cssClass}}"
   data-tab="main"
   action-data="tab"
   data-group="items" >
@@ -52,13 +52,46 @@
               </option>
             {{/each}}
           </select>
-          {{#if items.brooms.selectedBroom}}
-            <div class="wand-details">
-              <div class="flexcol">
-                <img src="{{items.brooms.selectedBroom.img}}" alt="{{items.brooms.selectedBroom.name}}">
-              </div>
+{{#if items.brooms.selectedBroom}}
+  <div class="wand-details">
+    <div class="flexcol">
+      <img
+        src="{{items.brooms.selectedBroom.img}}"
+        alt="{{items.brooms.selectedBroom.name}}"
+      >
+    </div>
+
+    <div class="flexcol">
+      <p>{{items.brooms.selectedBroom.riderDescription}}</p>
+
+      {{#with items.brooms.selectedBroom.bonus as |bonus|}}
+        {{#if bonus}}
+          {{#if (eq bonus.type "strength")}}
+            <div class="broom-bonus">
+              <label>{{localize "kotb.gainStrength"}}</label>
+            <a data-action="openStrength" data-id="{{bonus.uuid}}">{{bonus.name}}</a>
             </div>
           {{/if}}
+
+          {{#if (eq bonus.type "skill")}}
+            <div class="broom-bonus">
+              <label>{{localize "kotb.gainSkillBonus"}}</label>
+              <span>{{localize (concat "kotb.attributes." bonus.skill)}}</span>
+              <span>+{{bonus.value}}</span>
+            </div>
+          {{/if}}
+
+          {{#if (eq bonus.type "other")}}
+            <div class="broom-bonus">
+              <label>{{localize "kotb.gainotherBonus"}}</label>
+              {{{bonus.description}}}
+            </div>
+          {{/if}}
+        {{/if}}
+      {{/with}}
+    </div>
+  </div>
+{{/if}}
     
         </div>
         <div class="equipment-section">

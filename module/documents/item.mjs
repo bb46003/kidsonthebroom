@@ -1,67 +1,43 @@
-/**
- * Extend the basic Item with some very simple modifications.
- * @extends {Item}
- */
-export class KidsOnBroomsItem extends Item {
-  /**
-   * Augment the basic Item data model with additional dynamic data.
-   */
-  prepareData() {
-    // As with the actor class, items are documents that can have their data
-    // preparation methods overridden (such as prepareBaseData()).
-    super.prepareData();
-  }
 
-  /**
-   * Prepare a data object which is passed to any Roll formulas which are created related to this Item
-   * @private
-   */
-  getRollData() {
-    // If present, return the actor's roll data.
-    if (!this.actor) return null;
-    const rollData = this.actor.getRollData();
-    rollData.item = foundry.utils.deepClone(this.data.data);
+export class KotbItem extends Item {
+  async _onUpdate(data, options, user) {
+    await super._onUpdate(data, options, user);
 
-    return rollData;
-  }
+    const changedOption = Object.entries({
+      gainStrength: "system.gainStrength.use",
+      gainSkillBonus: "system.gainSkillBonus.use",
+      other: "system.other.use"
+    }).find(([key, path]) => foundry.utils.getProperty(data, path) === true);
 
-  /**
-   * Handle clickable rolls.
-   * @param {Event} event   The originating click event
-   * @private
-   */
-  async roll() {
-    const item = this.data;
+    if (!changedOption) return;
 
-    // Initialize chat data.
-    const speaker = ChatMessage.getSpeaker({ actor: this.actor });
-    const rollMode = game.settings.get("core", "rollMode");
-    const label = `[${item.type}] ${item.name}`;
+    const [selected] = changedOption;
 
-    // If there's no roll data, send a chat message.
-    if (!this.data.data.formula) {
-      ChatMessage.create({
-        speaker: speaker,
-        rollMode: rollMode,
-        flavor: label,
-        content: item.data.description ?? "",
-      });
+    const update = {};
+
+    for (const [key, path] of Object.entries({
+      gainStrength: "system.gainStrength",
+      gainSkillBonus: "system.gainSkillBonus",
+      other: "system.other"
+    })) {
+      if (key === selected) continue;
+
+      update[`${path}.use`] = false;
+
+      if (key === "gainStrength") {
+        update[`${path}.itemID`] = "";
+      }
+
+      if (key === "gainSkillBonus") {
+        update[`${path}.skill`] = "brains";
+        update[`${path}.value`] = 1;
+      }
+
+      if (key === "other") {
+        update[`${path}.description`] = "";
+      }
     }
-    // Otherwise, create a roll and send a chat message from it.
-    else {
-      // Retrieve roll data.
-      const rollData = this.getRollData();
 
-      // Invoke the roll and submit it to chat.
-      const roll = new Roll(rollData.item.formula, rollData);
-      // If you need to store the value first, uncomment the next line.
-      // let result = await roll.roll({async: true});
-      roll.toMessage({
-        speaker: speaker,
-        rollMode: rollMode,
-        flavor: label,
-      });
-      return roll;
-    }
+    await this.update(update);
   }
 }

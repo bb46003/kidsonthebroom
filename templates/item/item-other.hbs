@@ -1,0 +1,32 @@
+
+<div class="wand-sheet">
+    <header class="talent-header flexrow">
+      <div class="image-container">
+        <img
+          class="profile-img"
+          src="{{item.img}}"
+          data-edit="img"
+          data-action="editImage"
+          data-edit="img"
+        />
+      </div>
+      <h3>{{localize "kotb.otherNames"}}
+        <input
+          name="name"
+          type="text"
+          value="{{item.name}}"
+          placeholder="Name"
+        />
+      </h3>
+
+    </header>
+    <div class="field-group">
+        <label>{{localize systemFields.description.label}}</label>
+        {{formInput
+            description.field
+            value=description.value
+            enriched=description.enriched
+            toggled="true"
+        }}
+    </div>
+</div>

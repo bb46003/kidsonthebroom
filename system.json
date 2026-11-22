@@ -34,7 +34,8 @@
     "Item":{
       "strengths":{},
       "wand":{},
-      "broom": {}
+      "broom": {},
+      "other": {}
     }
   },
   "socket": true,

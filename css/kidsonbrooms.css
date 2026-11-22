@@ -273,6 +273,7 @@ border: 1px solid;
 }
 
 .equipment{
+  overflow-y: auto;
   .wand-details-eq{
    display: grid;
             grid-template-columns: 100px 11em 11em 0.2fr;
@@ -291,6 +292,27 @@ border: 1px solid;
     min-width: 100%;
   }
   }
+  .other-details-eq{
+       display: grid;
+            grid-template-columns: 100px 22em 0.2fr;
+            grid-template-rows: 1fr;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 5px;
+            .description{
+              overflow-wrap: break-word;
+            }
+  }
+}
+.tab.equipment{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
+  prose-mirror{
+    height: 100%;
+    max-height: 100%;
+  }
+
 }
 }
 .kotb-item{

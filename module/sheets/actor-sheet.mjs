@@ -18,7 +18,8 @@ export class StudentSheet extends api.HandlebarsApplicationMixin(
     },
     actions: {
       toggle: StudentSheet.#toggle,
-      itemContextMenu: StudentSheet.#itemContextMenu
+      itemContextMenu: StudentSheet.#itemContextMenu,
+      openStrength: StudentSheet.#openStrength,
     },
   };
   static PARTS = {
@@ -109,7 +110,8 @@ export class StudentSheet extends api.HandlebarsApplicationMixin(
     const items = {
       strengths: await this.prepareStrengths(),
       wands: await this.prepareWand(),
-      brooms: await this.prepareBrooms()
+      brooms: await this.prepareBrooms(),
+      others : await this.prepareOthersItems()
     }
     Object.assign(context, {
       tokenDisplay: this.tokenDisplay,
@@ -209,51 +211,122 @@ async prepareWand() {
     selectedWand: wands.find((wand) => wand.isHeld) ?? null,
   };
 }
-async prepareBrooms(){
+async prepareBrooms() {
   const brooms = this.actor.items
     .filter((item) => item.type === "broom")
-    .map((broom) => ({
-      id: broom.id,
-      img: broom.img,
-      name: broom.name,
-      isHeld: broom.system.isHeld
-    }));
+    .map((broom) => {
+      const { gainStrength, gainSkillBonus, other } = broom.system;
+
+      const strengthItem = gainStrength.use
+        ? this.actor.items.filter(
+    (item) => item.getFlag("kotb", "fromBroom")
+  )[0]
+        : null;
+
+      return {
+        id: broom.id,
+        img: broom.img,
+        name: broom.name,
+        isHeld: broom.system.isHeld,
+        riderDescription: broom.system.riderDescription,
+
+        bonus: gainStrength.use
+          ? {
+              type: "strength",
+              name: strengthItem?.name ?? "",
+              uuid: strengthItem?.uuid ?? "",
+            }
+          : gainSkillBonus.use
+            ? { type: "skill", ...gainSkillBonus }
+            : other.use
+              ? { type: "other", ...other }
+              : null,
+      };
+    });
 
   return {
     brooms,
     selectedBroom: brooms.find((broom) => broom.isHeld) ?? null,
   };
 }
+async prepareOthersItems(){
+  const items = this.actor.items.filter((item) => item.type === "other").map((other) => ({
+      id: other.id,
+      img: other.img,
+      name: other.name,
+      description: other.system.description
+    }));
+  return items
+}
 _processFormData(event, form, formData) {
   const target = event.target;
   const name = target.name;
 
   if (name === "system.wand") {
-    const selectedWandId = target.value;
-
-    const wands = this.actor.items.filter((item) => item.type === "wand")
-    wands.forEach((wand) =>{
-      if(wand.id === selectedWandId){
-        wand.update({["system.isHeld"]:true})
-      }else{
-         wand.update({["system.isHeld"]:false})
-      }
-    })
+    this.updateHeldItem("wand", target.value);
   }
-    if (name === "system.broom") {
-    const selectedBroomId = target.value;
 
-    const brooms = this.actor.items.filter((item) => item.type === "broom")
-    brooms.forEach((broom) =>{
-      if(broom.id === selectedBroomId){
-        broom.update({["system.isHeld"]:true})
-      }else{
-         broom.update({["system.isHeld"]:false})
-      }
-    })
+  if (name === "system.broom") {
+    this.updateHeldBroom(target.value);
   }
-   delete formData.object["system.wand"];
-   delete formData.object["system.broom"];
+
+  delete formData.object["system.wand"];
+  delete formData.object["system.broom"];
+
   return super._processFormData(event, form, formData);
+}
+async updateHeldItem(type, selectedId) {
+  const items = this.actor.items.filter((item) => item.type === type);
+
+  await Promise.all(
+    items.map((item) =>
+      item.update({
+        "system.isHeld": item.id === selectedId,
+      })
+    )
+  );
+}
+async updateHeldBroom(selectedId) {
+  // Remove previously generated items
+  const generatedItems = this.actor.items.filter(
+    (item) => item.getFlag("kotb", "fromBroom")
+  );
+
+  if (generatedItems.length) {
+    await this.actor.deleteEmbeddedDocuments(
+      "Item",
+      generatedItems.map((item) => item.id)
+    );
+  }
+
+  // Update held broom
+  await this.updateHeldItem("broom", selectedId);
+
+  const selectedBroom = this.actor.items.get(selectedId);
+
+  if (!selectedBroom?.system.gainStrength.use) return;
+
+  // Retrieve world item
+  const strengthItem = await fromUuid(
+    selectedBroom.system.gainStrength.itemID
+  );
+
+  if (!strengthItem) return;
+
+  const itemData = strengthItem.toObject();
+
+  delete itemData._id;
+
+  itemData.flags ??= {};
+  itemData.flags.kotb ??= {};
+  itemData.flags.kotb.fromBroom = true;
+
+  await this.actor.createEmbeddedDocuments("Item", [itemData]);
+}
+static async #openStrength(ev){
+  const target = ev.target;
+  const Uuid = target.dataset.id;
+  const item = await fromUuid(Uuid);
+ item?.sheet.render(true);
 }
 }
