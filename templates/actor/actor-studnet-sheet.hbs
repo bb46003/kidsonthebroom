@@ -44,15 +44,22 @@
       <section class="sheet-panel equipment-panel">
         <div class="equipment-section">
           <h3>{{localize "kotb.broom"}}</h3>
-
-          {{#each itemsByType.broom}}
-            <div class="item-entry" data-item-id="{{this.id}}">
-              <img src="{{this.img}}" alt="{{this.name}}" />
-              <span>{{this.name}}</span>
+          <select name="system.broom">
+            <option value="">{{localize "kotb.broom.noSelection"}}</option>
+            {{#each items.brooms.brooms as |broom|}}
+              <option value="{{broom.id}}" {{#if broom.isHeld}}selected{{/if}}>
+              {{broom.name}}
+              </option>
+            {{/each}}
+          </select>
+          {{#if items.brooms.selectedBroom}}
+            <div class="wand-details">
+              <div class="flexcol">
+                <img src="{{items.brooms.selectedBroom.img}}" alt="{{items.brooms.selectedBroom.name}}">
+              </div>
             </div>
-          {{else}}
-            <p>{{localize "kotb.noBroom"}}</p>
-          {{/each}}
+          {{/if}}
+    
         </div>
         <div class="equipment-section">
           <h3>{{localize "kotb.wand"}}</h3>
@@ -64,7 +71,6 @@
       <option value="">{{localize "kotb.wand.noSelection"}}</option>
 
       {{#each items.wands.wands as |wand|}}
-      {{log wand}}
         <option value="{{wand.id}}" {{#if wand.isHeld}}selected{{/if}}>
           {{wand.name}}
         </option>

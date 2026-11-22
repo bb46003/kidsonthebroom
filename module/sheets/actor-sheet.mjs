@@ -109,6 +109,7 @@ export class StudentSheet extends api.HandlebarsApplicationMixin(
     const items = {
       strengths: await this.prepareStrengths(),
       wands: await this.prepareWand(),
+      brooms: await this.prepareBrooms()
     }
     Object.assign(context, {
       tokenDisplay: this.tokenDisplay,
@@ -208,6 +209,21 @@ async prepareWand() {
     selectedWand: wands.find((wand) => wand.isHeld) ?? null,
   };
 }
+async prepareBrooms(){
+  const brooms = this.actor.items
+    .filter((item) => item.type === "broom")
+    .map((broom) => ({
+      id: broom.id,
+      img: broom.img,
+      name: broom.name,
+      isHeld: broom.system.isHeld
+    }));
+
+  return {
+    brooms,
+    selectedBroom: brooms.find((broom) => broom.isHeld) ?? null,
+  };
+}
 _processFormData(event, form, formData) {
   const target = event.target;
   const name = target.name;
@@ -224,7 +240,20 @@ _processFormData(event, form, formData) {
       }
     })
   }
-   delete formData.object["system.wand"]
+    if (name === "system.broom") {
+    const selectedBroomId = target.value;
+
+    const brooms = this.actor.items.filter((item) => item.type === "broom")
+    brooms.forEach((broom) =>{
+      if(broom.id === selectedBroomId){
+        broom.update({["system.isHeld"]:true})
+      }else{
+         broom.update({["system.isHeld"]:false})
+      }
+    })
+  }
+   delete formData.object["system.wand"];
+   delete formData.object["system.broom"];
   return super._processFormData(event, form, formData);
 }
 }

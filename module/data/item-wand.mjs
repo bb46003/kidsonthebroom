@@ -27,7 +27,7 @@ export class wandDataModel extends foundry.abstract.TypeDataModel {
         label: "kotb.strength.fields.skill",
       }),
       },{label: "kotb.wand.core"}),
-            wood: new SchemaField({
+      wood: new SchemaField({
         name: new StringField({
           initial:"",
           required: true

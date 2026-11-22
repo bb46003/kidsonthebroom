@@ -2,5 +2,54 @@
   data-tab="equipment"
   action-data="tab"
   data-group="items">
+  <div>
+    <h3>{{localize "kotb.wands"}}</h3>
+    <div>
+    {{#each items.wands.wands as |wand|}}
+    <div class="wand-details-eq">
+      
+      <div class="flexcol">
+        <img src="{{wand.img}}">
+        <label>{{wand.name}}</label>
+      </div>
+      
+      <div class="flexcol">
+        <label>{{localize "kotb.wand.core"}}</label>
+        <span>{{wand.core.name}}</span>
+        <span>{{localize (concat "kotb.attributes." wand.core.skill)}}</span>
+      </div>
 
+      <div class="flexcol">
+        <label>{{localize "kotb.wand.wood"}}</label>
+        <span>{{wand.wood.name}}</span>
+        <span>{{localize (concat "kotb.attributes."wand.wood.skill)}}</span>
+      </div>
+      <a class="threeDots" data-action="itemContextMenu" data-item="{{wand.id}}">
+        <i class="fas fa-ellipsis-v"></i>
+      </a>
+    </div>
+    {{/each}}
+    </div>
+  </div>
+    <div>
+    <h3>{{localize "kotb.brooms"}}</h3>
+    <div>
+    {{#each items.brooms as |broom|}}
+    <div class="wand-details-eq">
+      
+      <div class="flexcol">
+        <img src="{{broom.img}}">
+        <label>{{broom.name}}</label>
+      </div>      
+      <div class="flexcol">
+        <label>{{localize "kotb.riderDescription"}}</label>
+        <span>{{broom.riderDescription}}</span>
+      </div>
+      <a class="threeDots" data-action="itemContextMenu" data-item="{{wand.id}}">
+        <i class="fas fa-ellipsis-v"></i>
+      </a>
+    </div>
+    {{/each}}
+    </div>
+  </div>
 </section>

@@ -456,17 +456,17 @@ export class StudentDataModel extends foundry.abstract.TypeDataModel {
       motivation: new HTMLField({
         label: "kotb.motivation",
         initial: "",
-        requiredd: true,
+        required: true,
       }),
       fear: new HTMLField({
         label: "kotb.fear",
         initial: "",
-        requiredd: true,
+        required: true,
       }),
       pronouns: new StringField({
         label: "kotb.pronouns",
         initial: "",
-        requiredd: true,
+        required: true,
       }),
       animalfamiliar: new SchemaField(
         {
@@ -488,22 +488,22 @@ export class StudentDataModel extends foundry.abstract.TypeDataModel {
       tropequestions: new HTMLField({
         label: "kotb.tropequestions",
         initial: "",
-        requiredd: true,
+        required: true,
       }),
       equipment: new HTMLField({
         label: "kotb.equipment",
         initial: "",
-        requiredd: true,
+        required: true,
       }),
       description: new HTMLField({
         label: "kotb.description",
         initial: "",
-        requiredd: true,
+        required: true,
       }),
       notes: new HTMLField({
         label: "kotb.notes",
         initial: "",
-        requiredd: true,
+        required: true,
       }),
       lessonPlan: new SchemaField({
         topics: new ArrayField(
@@ -567,8 +567,8 @@ export class StudentDataModel extends foundry.abstract.TypeDataModel {
       }),
     };
   }
-  prepareDerivedData() {
-    super.prepareDerivedData();
+  prepareDerivedata() {
+    super.prepareDerivedata();
     this._setMinimumAge();
     this._prepareAttributeTotals();
   }

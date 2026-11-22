@@ -3,9 +3,10 @@ import { StudentSheet } from "./sheets/actor-sheet.mjs";
 import { HomeScore } from "./app/home_score.mjs";
 import { StudentDataModel } from "./data/actor-data.mjs";
 import { StrengthsDataModel } from "./data/item-strengths.mjs";
-import { StrengthsItemSheet } from "./sheets/item-sheet.mjs";
+import { StrengthsItemSheet, WandItemSheet, BroomItemSheet} from "./sheets/item-sheet.mjs";
 import * as utils from "./utils.mjs";
 import { wandDataModel } from "./data/item-wand.mjs";
+import { BroomDataModel } from "./data/item-broom.mjs";
 /* -------------------------------------------- */
 /*  Init Hook                                   */
 /* -------------------------------------------- */
@@ -113,7 +114,8 @@ Hooks.once("init", function () {
   };
   CONFIG.Item.dataModels = {
     strengths: StrengthsDataModel,
-    wand: wandDataModel
+    wand: wandDataModel,
+    broom: BroomDataModel
   }
 
   foundry.applications.apps.DocumentSheetConfig.unregisterSheet(
@@ -126,8 +128,11 @@ Hooks.once("init", function () {
     "core",
     foundry.applications.sheets.ItemSheetV2,
   );
-    utils.registerSystemSheet(foundry.documents.Actor, StudentSheet, "student");
+  utils.registerSystemSheet(foundry.documents.Actor, StudentSheet, "student");
   utils.registerSystemSheet(foundry.documents.Item, StrengthsItemSheet, "strengths");
+  utils.registerSystemSheet(foundry.documents.Item, WandItemSheet, "wand");
+  utils.registerSystemSheet(foundry.documents.Item, BroomItemSheet, "broom");
+
 });
 
 /* -------------------------------------------- */

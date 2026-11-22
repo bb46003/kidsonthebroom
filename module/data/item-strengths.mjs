@@ -64,7 +64,7 @@ export class StrengthsDataModel extends foundry.abstract.TypeDataModel {
     description: new HTMLField({
         label: "kotb.description",
         initial: "",
-        requiredd: true,
+        required: true,
       }),
     };
     

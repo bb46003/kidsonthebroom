@@ -271,9 +271,30 @@ border: 1px solid;
 .equipment-section{
     margin-bottom: 10px;
 }
+
+.equipment{
+  .wand-details-eq{
+   display: grid;
+            grid-template-columns: 100px 11em 11em 0.2fr;
+            grid-template-rows: 1fr;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 5px;
+
+  .flexcol {
+               display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+  }
+
+  .item-img {
+    min-width: 100%;
+  }
+  }
+}
 }
 .kotb-item{
-  .strength-sheet{
+  .strength-sheet, .broom-sheet{
     overflow: auto;
   }
 
@@ -298,6 +319,9 @@ display: grid;
         input, select{
           text-align: center;
         }
+  [name="system.other.description"] {
+    grid-column: 1 / -1;
+  }
   }
 }
 .menu-option{

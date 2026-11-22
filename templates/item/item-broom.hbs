@@ -1,0 +1,67 @@
+
+<div class="broom-sheet">
+    <header class="talent-header flexrow">
+      <div class="image-container">
+        <img
+          class="profile-img"
+          src="{{item.img}}"
+          data-edit="img"
+          data-action="editImage"
+          data-edit="img"
+        />
+      </div>
+      <h3>{{localize "kotb.broomName"}}
+        <input
+          name="name"
+          type="text"
+          value="{{item.name}}"
+          placeholder="Name"
+        />
+      </h3>
+
+    </header>
+    <div class="form-group">
+        <label>{{systemFields.riderDescription.label}}</label>
+        {{formInput systemFields.riderDescription value=system.riderDescription}}
+    </div>
+    <div class="form-group">
+        <label>{{systemFields.gainStrength.fields.use.label}}</label>
+        {{formInput systemFields.gainStrength.fields.use value=system.gainStrength.use}}
+        {{#if system.gainStrength.use}}
+          <label>{{localize systemFields.gainStrength.fields.itemID.label }}</label>
+          {{formInput systemFields.gainStrength.fields.itemID value=system.gainStrength.itemID}}
+        {{/if}}
+    </div>
+    <div class="form-group">
+        <label>{{systemFields.gainSkillBonus.fields.use.label}}</label>
+        {{formInput systemFields.gainSkillBonus.fields.use value=system.gainSkillBonus.use}}
+        {{#if system.gainSkillBonus.use}}
+          <label>{{localize systemFields.gainSkillBonus.fields.skill.label }}</label>
+          {{formInput systemFields.gainSkillBonus.fields.skill value=system.gainSkillBonus.skill localize=true}}
+          <label>{{localize systemFields.gainSkillBonus.fields.value.label }}</label>
+          {{formInput systemFields.gainSkillBonus.fields.value value=system.gainSkillBonus.value}}
+        {{/if}}
+    </div>
+      <div class="form-group">
+        <label>{{systemFields.other.fields.use.label}}</label>
+        {{formInput systemFields.other.fields.use value=system.other.use}}
+        {{#if system.other.use}}
+          <label>{{localize systemFields.other.fields.description.label }}</label>
+          {{formInput
+            otherDescription.field
+            value=otherDescription.value
+            enriched=otherDescription.enriched
+            toggled="true"
+        }}
+        {{/if}}
+    </div>
+        <div class="field-group">
+        <label>{{localize systemFields.description.label}}</label>
+        {{formInput
+            description.field
+            value=description.value
+            enriched=description.enriched
+            toggled="true"
+        }}
+    </div>
+</div>
