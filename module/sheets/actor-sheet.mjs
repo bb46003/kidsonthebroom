@@ -20,6 +20,7 @@ export class StudentSheet extends api.HandlebarsApplicationMixin(
       toggle: StudentSheet.#toggle,
       itemContextMenu: StudentSheet.#itemContextMenu,
       openStrength: StudentSheet.#openStrength,
+      addLesson: StudentSheet.#addLesson,
     },
   };
   static PARTS = {
@@ -35,7 +36,12 @@ export class StudentSheet extends api.HandlebarsApplicationMixin(
     },
     equipment:{
       template: "systems/kotb/templates/actor/parts/actor-student-eq.hbs",
-
+    },
+    bio:{
+      template: "systems/kotb/templates/actor/parts/actor-student-bio.hbs",
+    },
+    "lesson-plan":{
+      template: "systems/kotb/templates/actor/parts/actor-student-lesson-plan.hbs",
     }
   };
   static TABS = {
@@ -272,6 +278,23 @@ _processFormData(event, form, formData) {
 
   delete formData.object["system.wand"];
   delete formData.object["system.broom"];
+const progression = form.querySelectorAll(".topic-progression");
+
+progression.forEach((container) => {
+  const checked = [...container.querySelectorAll(".progression-input:checked")];
+
+  const value = target.matches(".progression-input") && container.contains(target)
+    ? target.checked
+      ? Number(target.value)
+      : checked.length
+        ?  Number(target.value) - 1
+        : 0
+    : checked.length
+      ? Math.max(...checked.map((input) => Number(input.value)))
+      : 0;
+
+  formData.object[container.dataset.name] = value;
+});
 
   return super._processFormData(event, form, formData);
 }
@@ -328,5 +351,11 @@ static async #openStrength(ev){
   const Uuid = target.dataset.id;
   const item = await fromUuid(Uuid);
  item?.sheet.render(true);
+}
+static async #addLesson(){
+  const newTopic = {name:"",progress:0};
+  const updateData = this.actor.system.lessonPlan.topics
+  updateData.push(newTopic);
+  await this.actor.update({['system.lessonPlan.topics']:updateData})
 }
 }

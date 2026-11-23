@@ -1,0 +1,45 @@
+<section   class="tab lesson-plan {{tabs.lesson-plan.cssClass}}"
+  data-tab="lesson-plan"
+  action-data="tab"
+  data-group="items">
+
+  <div>
+    <h4>
+      {{localize "kotb.lessons"}}
+      <a data-action="addLesson"><i class="fa fa-plus"></i></a>
+    </h4>
+    <div class="for-group">
+       
+{{#each system.lessonPlan.topics as |topic index|}}
+  <div class="topic-entry">
+    <div class="flexrow">
+    {{formInput
+      ../systemFields.lessonPlan.fields.topics.element.fields.name
+      value=topic.name
+      name=(concat "system.lessonPlan.topics." index ".name")
+    }}
+    
+</div>
+<a data-action="removeTopic" data-index="{{index}}"><i class="fa fa-minus"></i></a>
+<div class="topic-progression" data-name="system.lessonPlan.topics.{{index}}.progress">
+  {{#each (rangeArray 1 10) as |progression|}}
+    <label>
+      <input
+        class="progression-input {{#if (or (eq progression 3) (eq progression 6) (eq progression 10))}}progression-special{{/if}}"
+        type="checkbox"
+        value="{{progression}}"
+        {{#if (gte topic.progress progression)}}checked{{/if}}
+      />
+      {{progression}}
+    </label>
+  {{/each}}
+</div>
+  </div>
+{{/each}}
+    </div>
+  </div>
+    <div>
+    <h4>{{localize "kotb.lessonPlan"}}</h4>
+
+  </div>
+</section>  

@@ -1,0 +1,24 @@
+<section   class="tab bio {{tabs.bio.cssClass}}"
+  data-tab="bio"
+  action-data="tab"
+  data-group="items">
+
+  <div>
+    <h4>{{localize "kotb.description"}}</h4>
+        {{formInput
+          description.field
+          value=description.value
+          enriched=description.enriched
+          toggled="true"
+        }}
+  </div>
+    <div>
+    <h4>{{localize "kotb.notes"}}</h4>
+        {{formInput
+          notes.field
+          value=notes.value
+          enriched=notes.enriched
+          toggled="true"
+        }}
+  </div>
+</section>  
